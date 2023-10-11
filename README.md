@@ -1,5 +1,5 @@
 <div style="text-align: center;">
-  <a href="https://expo.dev/" target="blank"><img src="https://d1wp6m56sqw74a.cloudfront.net/~assets/2eaecfb6f7d1ff410d5d4b8a5e00a0cd.svg" width="200" alt="Expo Logo" /></a>
+  <a href="https://expo.dev/" target="blank"><img src="https://bookface-images.s3.amazonaws.com/logos/bf3ca13e31f46bc60e117c9f9e05f6be6c95ebf5.png" width="200" alt="Expo Logo" /></a>
 </div>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/reactnative/react/master?token=abc123def456
