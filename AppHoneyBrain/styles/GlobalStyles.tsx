@@ -10,26 +10,32 @@ export const GlobalStyles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    marginTop: 50,
     fontWeight: 'bold',
     color: Colors.primary,
     marginBottom: 20,
+    textAlign: 'center'
   },
-  title2: {
-    fontSize: 24,
-    marginTop: 100,
-    fontWeight: 'bold',
-    color: Colors.primary,
-    marginBottom: 20,
+  input: {
+    width: '80%',
+    height: 45,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingLeft: 10,
+    marginVertical: 10,
   },
   button: {
+    width: '80%',
+    height: 45,
     backgroundColor: Colors.secondary,
-    padding: 10,
     borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
     marginVertical: 10,
   },
   buttonText: {
     color: Colors.white,
+    fontWeight: 'bold',
   },
   row: {
     flexDirection: 'row',

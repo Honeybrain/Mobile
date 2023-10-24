@@ -12,13 +12,15 @@ type WelcomeScreenProps = {
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => (
   <View style={GlobalStyles.container}>
-    <Image source={require('../assets/honeybrainlogo.png')} resizeMode="contain" style={{ width: 200, height: 200 }} />
-    <Text style={GlobalStyles.title}>Bienvenue sur l'app HoneyBrain!</Text>
+    <Image source={require('../assets/honeybrainlogo.png')} resizeMode="contain" style={{ width: 125, height: 125 }} />
+    <Text style={GlobalStyles.title}>Bienvenue sur l'application HoneyBrain!</Text>
     <TouchableOpacity style={GlobalStyles.button} onPress={() => navigation.navigate('Login')}>
       <Text style={GlobalStyles.buttonText}>Login</Text>
     </TouchableOpacity>
+    {/* <TouchableOpacity style={GlobalStyles.button} onPress={() => navigation.navigate('Home')}>
+      <Text style={GlobalStyles.buttonText}>Login</Text>
+    </TouchableOpacity> */}
   </View>
 );
 
 export default WelcomeScreen;
- 

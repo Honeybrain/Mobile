@@ -9,6 +9,9 @@ import SettingsScreen from '../src/SettingsScreen';
 import IpScreen from '../src/IpScreen';
 import ContainerScreen from '../src/ContainerScreen';
 import MainNavigator from './MainNavigator';
+import History from '../src/HistoryScreen';
+import Notif from '../src/NotifScreen';
+
 const Stack = createStackNavigator<RootStackParamList>();
 
 const AppNavigator: React.FC = () => (
@@ -21,6 +24,8 @@ const AppNavigator: React.FC = () => (
     <Stack.Screen name="Ip" component={IpScreen} />
     <Stack.Screen name="Container" component={ContainerScreen} />
     <Stack.Screen name="Main" component={MainNavigator} />
+    <Stack.Screen name="History" component={History} />
+    <Stack.Screen name="Notif" component={Notif} />
   </Stack.Navigator>
   
 );

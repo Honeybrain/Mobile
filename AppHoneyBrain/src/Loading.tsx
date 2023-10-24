@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#efda84',
+    backgroundColor: 'white',
   },
   logo: {
     marginBottom: 20,
-    width: 150,
-    height: 150,
+    width: 125,
+    height: 125,
     resizeMode: 'contain',
   },
 });

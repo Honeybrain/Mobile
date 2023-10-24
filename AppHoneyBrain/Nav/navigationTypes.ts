@@ -7,4 +7,6 @@ export type RootStackParamList = {
   Ip: undefined;
   Container: undefined;
   Main: undefined;
+  History: undefined;
+  Notif: undefined;
 };
