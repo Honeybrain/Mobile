@@ -21,3 +21,4 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => (
 );
 
 export default WelcomeScreen;
+ 
