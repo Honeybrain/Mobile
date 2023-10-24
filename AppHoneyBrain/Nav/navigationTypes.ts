@@ -3,4 +3,8 @@ export type RootStackParamList = {
   Welcome: undefined;
   Login: undefined;
   Home: undefined;
+  Settings: undefined;
+  Ip: undefined;
+  Container: undefined;
+  Main: undefined;
 };
