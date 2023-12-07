@@ -1,63 +1,55 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
-
 
 type NavBarProps = {
   navigation: StackNavigationProp<RootStackParamList, keyof RootStackParamList>;
 };
 
 const NavBar: React.FC<NavBarProps> = ({ navigation }) => {
-  const navigateToHome = () => {
-    navigation.navigate('Home');
-  };
-
-  const navigateToSettings = () => {
-    navigation.navigate('Settings');
-  };
-
-  const navigateToIp = () => {
-    navigation.navigate('Ip');
-  };
-
-  const navigateToContainer = () => {
-    navigation.navigate('Container');
-  };  
-
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={navigateToHome}>
-        <Text style={{ fontSize: 40, marginRight: 40 }}>🏠</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={navigateToIp}>
-        <Text style={{ fontSize: 40, marginRight: 40 }}>🔒</Text> 
-      </TouchableOpacity>
-      <TouchableOpacity onPress={navigateToContainer}>
-      <Image
-        source={require('../assets/container.png')}
-        style={{ width: 40, height: 30, marginRight: 40, marginTop: 10}}
-      />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={navigateToSettings}>
-        <Text style={{ fontSize: 40}}>⚙️</Text> 
-      </TouchableOpacity>
+      <NavBarItem icon="🏠" onPress={() => navigation.navigate('Home')} />
+      <NavBarItem icon="🔒" onPress={() => navigation.navigate('Ip')} />
+      <NavBarItem 
+        iconComponent={<Image source={require('../assets/container.png')} style={styles.imageIcon} />}
+        onPress={() => navigation.navigate('Container')} icon={''}      />
+      <NavBarItem icon="⚙️" onPress={() => navigation.navigate('Settings')} />
     </View>
+  );
+};
+
+const NavBarItem: React.FC<{ icon: string; onPress: () => void; iconComponent?: React.ReactNode }> = ({ icon, onPress, iconComponent }) => {
+  return (
+    <TouchableOpacity onPress={onPress} style={styles.iconContainer}>
+      {iconComponent ? iconComponent : <Text style={styles.icon}>{icon}</Text>}
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
     padding: 20,
     position: 'absolute',
-    bottom: 0, // Position au bas de l'écran
-    width: '100%', // Largeur maximale
-    backgroundColor: 'blue', // Couleur d'arrière-plan si nécessaire
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#003061', // Couleur d'arrière-plan plus standard
+  },
+  iconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   icon: {
     fontSize: 30,
+  },
+  imageIcon: {
+    width: 40,
+    height: 40,
   },
 });
 

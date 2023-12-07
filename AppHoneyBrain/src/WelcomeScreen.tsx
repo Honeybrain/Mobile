@@ -17,9 +17,6 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => (
     <TouchableOpacity style={GlobalStyles.button} onPress={() => navigation.navigate('Login')}>
       <Text style={GlobalStyles.buttonText}>Login</Text>
     </TouchableOpacity>
-    {/* <TouchableOpacity style={GlobalStyles.button} onPress={() => navigation.navigate('Home')}>
-      <Text style={GlobalStyles.buttonText}>Login</Text>
-    </TouchableOpacity> */}
   </View>
 );
 
