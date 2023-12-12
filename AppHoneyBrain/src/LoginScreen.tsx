@@ -3,13 +3,16 @@ import { View, Text, TouchableOpacity, TextInput, ToastAndroid, Image } from 're
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
+import { useTranslation } from "react-i18next";
 // import AuthContext from '../../../Frontend/src//AuthContext';
+
 
 type LoginScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>;
 };
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   // const { login } = useContext(AuthContext);
@@ -28,7 +31,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   return (
     <View style={GlobalStyles.container}>
       <Image source={require('../assets/honeybrainlogo.png')} resizeMode="contain" style={{ width: 105, height: 125 }} />
-      <Text style={GlobalStyles.title}>Connectez-vous</Text>
+      <Text style={GlobalStyles.title}>{t('LoggingScreen.ConnectYourself')}</Text>
       <TextInput 
         placeholder="Username / Email" 
         style={GlobalStyles.input} 
@@ -41,7 +44,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         // onChangeText={(text) => setPassword(text)}
       />
     <TouchableOpacity style={GlobalStyles.button} onPress={() => navigation.navigate('Home')}>
-      <Text style={GlobalStyles.buttonText}>Login</Text>
+      <Text style={GlobalStyles.buttonText}>{t('LoggingScreen.Login')}</Text>
     </TouchableOpacity>
       {/* <Text style={{ marginTop: 10, color: '#666' }}>Forgot Password?</Text> */}
       {/* <TouchableOpacity style={{ marginTop: 20 }} onPress={() => navigation.navigate('Register')}>

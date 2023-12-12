@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { Colors } from '../styles/Colors';
+import { useTranslation } from "react-i18next";
+
 
 type ActionItem = {
   id: string;
@@ -31,6 +33,7 @@ const HistoryItem: React.FC<ActionItem> = ({ name, date, time, status }) => (
 );
 
 const HistoryScreen: React.FC = () => {
+  const { t } = useTranslation();
   const [data, setData] = useState<ActionItem[]>(initialData);
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState<'all' | 'attack' | 'dangerous'>('all');
@@ -46,7 +49,7 @@ const HistoryScreen: React.FC = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ ...GlobalStyles.container, padding: 20 }}>
-        <Text style={GlobalStyles.title}>Historique des actions</Text>
+        <Text style={GlobalStyles.title}>{t('History.ActionHistory')}</Text>
 
         <TextInput
           placeholder="Rechercher par action..."
@@ -60,19 +63,19 @@ const HistoryScreen: React.FC = () => {
             style={{ ...GlobalStyles.button, flex: 1, marginHorizontal: 5 }}
             onPress={() => setFilter('all')}
           >
-            <Text style={GlobalStyles.buttonText}>Tout</Text>
+            <Text style={GlobalStyles.buttonText}>{t('History.All')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{ ...GlobalStyles.button, flex: 1, marginHorizontal: 5 }}
             onPress={() => setFilter('attack')}
           >
-            <Text style={GlobalStyles.buttonText}>Attaques</Text>
+            <Text style={GlobalStyles.buttonText}>{t('History.Attacks')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{ ...GlobalStyles.button, flex: 1, marginHorizontal: 5 }}
             onPress={() => setFilter('dangerous')}
           >
-            <Text style={GlobalStyles.buttonText}>Danger</Text>
+            <Text style={GlobalStyles.buttonText}>{t('History.Danger')}</Text>
           </TouchableOpacity>
         </View>
 

@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, FlatList, SafeAreaView } from 'react-native';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { Colors } from '../styles/Colors';
+import { useTranslation } from "react-i18next";
+
 
 type NotificationItem = {
   id: string;
@@ -31,10 +33,11 @@ const NotificationCard: React.FC<NotificationItem> = ({ type, description, times
 );
 
 const NotificationsScreen: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ ...GlobalStyles.container, padding: 20 }}>
-        <Text style={GlobalStyles.title}>Notifications Honeypot</Text>
+        <Text style={GlobalStyles.title}>{t('NotifScreen.HoneypotNotification')}</Text>
 
         <FlatList
           data={sampleNotifications}

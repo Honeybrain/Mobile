@@ -1,0 +1,45 @@
+{
+  "HomePage": {
+    "Home": "Acceuil",
+    "History": "Historique",
+    "Notifications": "Notifications"
+  },
+  "IPScreen": {
+    "Connexions": "Connexions",
+    "IPAddress": "Adresses IP",
+    "Notifications": "Notifications",
+    "State": "État",
+    "Action": "Action",
+    "Blocked": "bloqué",
+    "NotBlocked": "non bloqué",
+    "Block": "bloquer",
+    "Unblock": "débloquer"
+  },
+  "LoggingScreen": {
+    "ConnectYourself": "Connectez-vous",
+    "Login": "connection"
+  },
+  "NotifScreen": {
+    "HoneypotNotifications": "Notifications Honeypot"
+  },
+  "SettingsScreen": {
+    "ChangePassword": "Changer le mot de passe",
+    "ChangeEmailAdress": "Changer l'addresse email",
+    "Validate": "Valider",
+    "French": "Francais",
+    "English": "Anglais",
+    "Spanish": "Espagnol",
+    "Chinese": "Chinois"
+  },
+  "WelcomeScreen": {
+    "WelcomeHoneybrain": "Bienvenue sur l'app Honeybrain!",
+    "Login": "connexion"
+  },
+  "History": {
+    "ActionHistory": "Historique d'action",
+    "All": "Tout",
+    "Attacks": "Attaques",
+    "Danger": "Danger"
+  }
+}
+

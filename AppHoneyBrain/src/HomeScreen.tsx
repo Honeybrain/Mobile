@@ -4,22 +4,26 @@ import { GlobalStyles } from '../styles/GlobalStyles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
 import NavBar from '../Nav/NavBar';
+import { useTranslation } from "react-i18next";
+
 
 type WelcomeScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Welcome'>;
 };
 
-const HomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => (
+const HomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
+  const { t } = useTranslation();
+  return(
   <View style={GlobalStyles.container}>
-    <Text style={GlobalStyles.title}>Accueil HoneyBrain</Text>
+    <Text style={GlobalStyles.title}>{t('HomePage.Home')} HoneyBrain</Text>
     <TouchableOpacity style={GlobalStyles.button} onPress={() => navigation.navigate('History')}>
-      <Text style={GlobalStyles.buttonText}>History</Text>
+      <Text style={GlobalStyles.buttonText}>{t('HomePage.History')}</Text>
     </TouchableOpacity>  
     <TouchableOpacity style={GlobalStyles.button} onPress={() => navigation.navigate('Notif')}>
-      <Text style={GlobalStyles.buttonText}>Notifications</Text>
+      <Text style={GlobalStyles.buttonText}>{t('HomePage.Notifications')}</Text>
     </TouchableOpacity>  
     <NavBar navigation={navigation} />
     </View>
-);
+)};
 
 export default HomeScreen;

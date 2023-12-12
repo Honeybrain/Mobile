@@ -1,0 +1,45 @@
+{
+  "HomePage": {
+    "Home": "家",
+    "History": "历史",
+    "Notifications": "通知"
+  },
+  "IPScreen": {
+    "Connexions": "连接",
+    "IPAddress": "IP 地址",
+    "Notifications": "通知",
+    "State": "状态",
+    "Action": "行动",
+    "Blocked": "已阻止",
+    "NotBlocked": "未阻止",
+    "Block": "块",
+    "Unblock": "解除封锁"
+  },
+  "LoggingScreen": {
+    "ConnectYourself": "连接你自己",
+    "Login": "登录"
+  },
+  "NotifScreen": {
+    "HoneypotNotifications": "蜜罐通知"
+  },
+  "SettingsScreen": {
+    "ChangePassword": "更改密码",
+    "ChangeEmailAdress": "更改电子邮件地址",
+    "Validate": "验证",
+    "French": "法语",
+    "English": "英语",
+    "Spanish": "西班牙语",
+    "Chinese": "中国人"
+  },
+  "WelcomeScreen": {
+    "WelcomeHoneybrain": "欢迎使用 Honeybrain 应用程序！",
+    "Login": "登录"
+  },
+  "History": {
+    "ActionHistory": "动作历史",
+    "All": "全部",
+    "Attacks": "攻击",
+    "Danger": "危险"
+  }
+}
+

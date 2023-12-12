@@ -4,6 +4,8 @@ import { GlobalStyles } from '../styles/GlobalStyles';
 import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
+import { useTranslation } from "react-i18next";
+
 
 type IpScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Ip'>;
@@ -16,6 +18,7 @@ type IP = {
 };
 
 const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
+  const { t } = useTranslation();
   const fakeIP: IP[] = [
     { id: 1, address: '192.168.0.1', state: false },
     { id: 2, address: '192.168.0.2', state: false },
@@ -33,14 +36,14 @@ const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
     return (
       <View style={rowStyle}>
         <Text style={[GlobalStyles.columnIP, isEvenRow && { color: 'white' }]}>{address}</Text>
-        {state ? <Text style={[GlobalStyles.columnIP, isEvenRow && { color: 'white' }]}>Bloquée</Text> 
-        :<Text style={[GlobalStyles.columnIP, isEvenRow && { color: 'white' }]}>Non bloquée</Text>}
+        {state ? <Text style={[GlobalStyles.columnIP, isEvenRow && { color: 'white' }]}>{t('IPScreen.Blocked')}</Text> 
+        :<Text style={[GlobalStyles.columnIP, isEvenRow && { color: 'white' }]}>{t('IPScreen.NotBlocked')}</Text>}
         {state ? 
           <TouchableOpacity style={{ ...GlobalStyles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
-          <Text style={{ color: 'black', fontWeight: 'bold' }}>Bloquer</Text>
+          <Text style={{ color: 'black', fontWeight: 'bold' }}>{t('IPScreen.Block')}</Text>
           </TouchableOpacity>
           : <TouchableOpacity style={{ ...GlobalStyles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
-          <Text style={{ color: 'black', fontWeight: 'bold' }}>Débloquer</Text>
+          <Text style={{ color: 'black', fontWeight: 'bold' }}>{t('IPScreen.Unblock')}</Text>
           </TouchableOpacity>}
       </View>
     );
@@ -53,11 +56,11 @@ const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
 
   return (
     <View style={GlobalStyles.container}>
-      <Text style={GlobalStyles.title2}>Connexions</Text>
+      <Text style={GlobalStyles.title2}>{t('IPScreen.Connexions')}</Text>
       <View style={GlobalStyles.row}>
-        <Text style={GlobalStyles.columnHeaderIP}>Adressse IP</Text>
-        <Text style={GlobalStyles.columnHeaderIP}>État</Text>
-        <Text style={GlobalStyles.columnHeaderIP}>Action</Text>
+        <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.IPAdress')}</Text>
+        <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.State')}</Text>
+        <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.Action')}</Text>
       </View>
       <FlatList
         data={fakeIP}

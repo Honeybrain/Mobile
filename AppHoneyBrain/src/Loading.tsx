@@ -4,12 +4,15 @@ import React, { useEffect } from 'react';
 import { View, ActivityIndicator, Image, StyleSheet } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
+import { useTranslation } from "react-i18next";
+
 
 type LoadingProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Loading'>;
 };
 
 const Loading: React.FC<LoadingProps> = ({ navigation }) => {
+  const { t } = useTranslation();
   
   useEffect(() => {
     setTimeout(() => {
