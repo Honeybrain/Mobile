@@ -1,8 +1,14 @@
 {
-  "HomePage": {
+  "HomeScreen": {
     "Home": "Inicio",
     "History": "Historia",
-    "Notifications": "Notificaciones"
+    "Notifications": "Notificaciones",
+    "ControlPanel": "Control panel",
+    "AttackDetected": "Se ha detectado un ataque en su sitio web.",
+    "IPBlocked": "IP bloqueada tras el ataque",
+    "Attack": "ataque",
+    "Threat": "amenaza",
+    "SignOut": "desconectar"
   },
   "IPScreen": {
     "Connexions": "Conexiones",
@@ -15,12 +21,21 @@
     "Block": "Bloquear",
     "Unblock": "Desatascar"
   },
-  "LoggingScreen": {
+  "LoginScreen": {
+    "UsernameEmail": "Nombre de usuario / Email",
+    "Password": "Contraseña",
+    "ConnectionSuccessful": "Te has conectado exitosamente",
+    "ConnectionFailed": "Error al conectar: ",
     "ConnectYourself": "Conéctate",
     "Login": "Acceso"
   },
   "NotifScreen": {
-    "HoneypotNotifications": "Honeypot Notificaciones"
+    "HoneypotNotifications": "Honeypot Notificaciones",
+    "SearchInNotifications": "Busca en las notificaciones...",
+    "AccessAttempt": "Intento de acceso desde la IP",
+    "PortScanDetected": "Escaneo de puertos detectado desde IP",
+    "BrutForceAttack": "Ataque de fuerza bruta al puerto",
+    "DOSAttack": "Ataque DoS detectado desde IP"
   },
   "SettingsScreen": {
     "ChangePassword": "Cambiar la contraseña",

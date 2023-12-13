@@ -56,9 +56,9 @@ const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
 
   return (
     <View style={GlobalStyles.container}>
-      <Text style={GlobalStyles.title2}>{t('IPScreen.Connexions')}</Text>
+      <Text style={GlobalStyles.title}>{t('IPScreen.Connexions')}</Text>
       <View style={GlobalStyles.row}>
-        <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.IPAdress')}</Text>
+        <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.IPAddress')}</Text>
         <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.State')}</Text>
         <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.Action')}</Text>
       </View>

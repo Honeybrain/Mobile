@@ -1,12 +1,18 @@
 {
-  "HomePage": {
+  "HomeScreen": {
     "Home": "Home",
     "History": "History",
-    "Notifications": "Notifications"
+    "Notifications": "Notifications",
+    "ControlPanel": "Control panel",
+    "AttackDetected": "an attack has been detected on your website",
+    "IPBlocked": "IP blocked following the attack",
+    "Attack": "Attack",
+    "Threat": "Threat",
+    "SignOut": "Sign out"
   },
   "IPScreen": {
     "Connexions": "Connections",
-    "IPAddress": "IP Adresses",
+    "IPAddress": "IP Addresses",
     "Notifications": "Notifications",
     "State": "State",
     "Action": "Action",
@@ -15,12 +21,21 @@
     "Block": "Block",
     "Unblock": "Unblock"
   },
-  "LoggingScreen": {
+  "LoginScreen": {
+    "UsernameEmail": "Username / Email",
+    "Password": "Password",
+    "ConnectionSuccessful": "You have successfully connected",
+    "ConnectionFailed": "Error while connecting: ",
     "ConnectYourself": "Connect yourself",
     "Login": "Login"
   },
   "NotifScreen": {
-    "HoneypotNotifications": "Honeypot Notifications"
+    "HoneypotNotifications": "Honeypot Notifications",
+    "SearchInNotifications": "Search in the notifications...",
+    "AccessAttempt": "Attempt to access from the IP",
+    "PortScanDetected": "Port scan detected from IP",
+    "BrutForceAttack": "Brute force attack on the port",
+    "DOSAttack": "DoS attack detected from IP"
   },
   "SettingsScreen": {
     "ChangePassword": "Change password",
@@ -35,11 +50,12 @@
     "WelcomeHoneybrain": "Welcome on the Honeybrain app!",
     "Login": "Login"
   },
-  "History": {
+  "HistoryScreen": {
     "ActionHistory": "Action history",
-    "All": "All",
-    "Attacks": "Attacks",
-    "Danger": "Danger"
+    "SearchByAction": "Search by actions...",
+    "Date:": "Date: ",
+    "Time:": "Time: ",
+    "Description:": "Description: "
   }
 }
 

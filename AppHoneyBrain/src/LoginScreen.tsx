@@ -22,11 +22,11 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, themedStyles }) =
     try {
       // Remplacez ceci par votre logique de connexion
       // await login(email, password);
-      Alert.alert("Connexion réussie"); // Utilisez Alert ici
+      Alert.alert(t('LoginScreen.ConnectionSuccessful')); // Utilisez Alert ici
       navigation.navigate('Home');
     } catch (error) {
       // Alert.alert("Erreur lors de la connexion", error.message); // Et ici
-      console.error('Erreur lors de la connexion:', error);
+      console.error(t('LoginScreen.ConnectionFailed'), error);
     }
   };
 
@@ -37,15 +37,15 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, themedStyles }) =
         resizeMode="contain" 
         style={styles.logo} 
       />
-      <Text style={[GlobalStyles.title, themedStyles.textStyle]}>Connectez-vous</Text>
+      <Text style={[GlobalStyles.title, themedStyles.textStyle]}>{t('LoginScreen.ConnectYourself')}</Text>
       <TextInput 
-        placeholder="Username / Email" 
+        placeholder={t('LoginScreen.UsernameEmail')}
         style={[GlobalStyles.input, themedStyles.textStyle]} 
         onChangeText={setEmail}
         value={email}
       />
       <TextInput 
-        placeholder="Password" 
+        placeholder={t('LoginScreen.Password')}
         secureTextEntry 
         style={[GlobalStyles.input, themedStyles.textStyle]} 
         onChangeText={setPassword}
@@ -54,7 +54,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, themedStyles }) =
       <TouchableOpacity 
         style={[GlobalStyles.button, themedStyles.buttonStyle]} 
         onPress={handleSubmit}>
-        <Text style={[GlobalStyles.buttonText, themedStyles.buttonTextStyle]}>Login</Text>
+        <Text style={[GlobalStyles.buttonText, themedStyles.buttonTextStyle]}>{t('LoginScreen.Login')}</Text>
       </TouchableOpacity>
     </View>
   );

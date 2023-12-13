@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { GlobalStyles } from '../styles/GlobalStyles';
-import { Colors } from '../styles/Colors';
 import { useTranslation } from "react-i18next";
 import { View, Text, TextInput, TouchableOpacity, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -81,24 +80,29 @@ const initialData: ActionItem[] = [
   { id: '5', name: 'Unauthorized Access', date: '2023-03-19', time: '15:00', user: 'Eve', description: 'Attempted unauthorized access', status: 'dangerous' },
 ];
 
-const HistoryItem: React.FC<ActionItem> = ({ name, date, time, user, description, status }) => (
-  <View style={styles.historyItem}>
-    <Ionicons
-      name={status === 'dangerous' ? 'alert-circle' : 'checkmark-circle'}
-      size={24}
-      color={status === 'dangerous' ? Colors.danger : Colors.safe}
-    />
-    <View style={{ marginLeft: 10 }}>
-      <Text style={styles.itemText}>{name.toUpperCase()} - {user}</Text>
-      <Text>Date: {date} - Time: {time}</Text>
-      <Text>Description: {description}</Text>
+const HistoryItem: React.FC<ActionItem> = ({ name, date, time, user, description, status }) => {
+  const { t } = useTranslation();
+
+  return(
+    <View style={styles.historyItem}>
+      <Ionicons
+        name={status === 'dangerous' ? 'alert-circle' : 'checkmark-circle'}
+        size={24}
+        color={status === 'dangerous' ? Colors.danger : Colors.safe}
+      />
+      <View style={{ marginLeft: 10 }}>
+        <Text style={styles.itemText}>{name.toUpperCase()} - {user}</Text>
+        <Text>{t('HistoryScreen.Date:')}{date} - {t('HistoryScreen.Time:')}{time}</Text>
+        <Text>{t('HistoryScreen.Description:')} {description}</Text>
+      </View>
     </View>
-  </View>
-);
+  )
+};
 
 const HistoryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [data, setData] = useState<ActionItem[]>(initialData);
   const [searchTerm, setSearchTerm] = useState('');
+  const { t } = useTranslation();
 
   const filteredData = data.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -107,9 +111,9 @@ const HistoryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       <TouchableOpacity style={styles.backArrow} onPress={() => navigation.navigate('Home')}>
         <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
-      <Text style={styles.title}>Historique des Actions</Text>
+      <Text style={styles.title}>{t('HistoryScreen.ActionHistory')}</Text>
       <TextInput
-        placeholder="Rechercher par action..."
+        placeholder={t('HistoryScreen.SearchByAction')}
         style={styles.input}
         value={searchTerm}
         onChangeText={setSearchTerm}

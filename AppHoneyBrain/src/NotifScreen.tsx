@@ -14,13 +14,6 @@ type NotificationItem = {
   timestamp: string;
 };
 
-const sampleNotifications: NotificationItem[] = [
-  { id: '1', type: 'UnauthorizedAccess', description: 'Tentative d\'accès depuis l\'IP 192.168.1.4', timestamp: '2023-10-10 14:30' },
-  { id: '2', type: 'PortScan', description: 'Scan de port détecté depuis l\'IP 192.168.1.5', timestamp: '2023-10-11 16:20' },
-  { id: '3', type: 'BruteForce', description: 'Attaque de force brute sur le port 22', timestamp: '2023-10-12 09:15' },
-  { id: '4', type: 'DoS', description: 'Attaque DoS détectée depuis l\'IP 192.168.1.6', timestamp: '2023-10-13 12:50' },
-];
-
 // Styles personnalisés
 const styles = StyleSheet.create({
   container: {
@@ -114,6 +107,13 @@ function getIconColor(type: NotificationItem['type']): string {
 const NotificationsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const { isDarkMode } = useContext(ThemeContext);
   const [searchTerm, setSearchTerm] = useState('');
+  const { t } = useTranslation();
+  const sampleNotifications: NotificationItem[] = [
+    { id: '1', type: 'UnauthorizedAccess', description: `${t('NotifScreen.AccessAttempt')} 192.168.1.4`, timestamp: '2023-10-10 14:30' },
+    { id: '2', type: 'PortScan', description: `${t('NotifScreen.PortScanDetected')} 192.168.1.5`, timestamp: '2023-10-11 16:20' },
+    { id: '3', type: 'BruteForce', description: `${t('NotifScreen.BrutForceAttack')} 22`, timestamp: '2023-10-12 09:15' },
+    { id: '4', type: 'DoS', description: `${t('NotifScreen.DOSAttack')} 192.168.1.6`, timestamp: '2023-10-13 12:50' },
+  ];
 
   const filteredNotifications = sampleNotifications.filter(notification =>
     notification.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -125,9 +125,9 @@ const NotificationsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       <TouchableOpacity style={styles.backArrow} onPress={() => navigation.navigate('Home')}>
         <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
-      <Text style={styles.title}>Notifications Honeypot</Text>
+      <Text style={styles.title}>{t('NotifScreen.HoneypotNotifications')}</Text>
       <TextInput
-        placeholder="Rechercher dans les notifications..."
+        placeholder={t('NotifScreen.SearchInNotifications')}
         style={styles.searchInput}
         value={searchTerm}
         onChangeText={setSearchTerm}
