@@ -4,6 +4,8 @@ import { GlobalStyles } from '../styles/GlobalStyles';
 import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList} from '../Nav/navigationTypes';
+import { useTranslation } from "react-i18next";
+
 
 type ContainerScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Container'>;
@@ -17,6 +19,7 @@ type Container = {
 };
 
 const ContainerScreen: React.FC<ContainerScreenProps> = ({ navigation }) => {
+  const { t } = useTranslation();
   const fakeContainers: Container[] = [
     { id: 1, name: 'Container 1', state: 'Running', ipAddress: '192.168.0.1' },
     { id: 2, name: 'Container 2', state: 'Stopped', ipAddress: '192.168.0.2' },

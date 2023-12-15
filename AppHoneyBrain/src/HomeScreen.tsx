@@ -5,6 +5,7 @@ import { RootStackParamList } from '../Nav/navigationTypes';
 import { ThemeContext } from '../NightMode/ThemeContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NavBar from '../Nav/NavBar';
+import { useTranslation } from "react-i18next";
 import { Ionicons } from '@expo/vector-icons';
 import Carousel from 'react-native-snap-carousel';
 import { Colors } from '../styles/Colors';
@@ -17,6 +18,7 @@ type HomeScreenProps = {
 };
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+  const { t } = useTranslation();
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -29,8 +31,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   }, [fadeAnim]);
 
   const systemAlerts = [
-    { id: 1, type: 'Attaque', message: 'Une attaque détectée sur votre site' },
-    { id: 2, type: 'Menace', message: 'IP bloquée suite à une attaque' },
+    { id: 1, type: t('HomeScreen.Attack'), message: t('HomeScreen.AttackDetected') },
+    { id: 2, type: t('HomeScreen.Threat'), message: t('HomeScreen.IPBlocked') },
 
     // Ajouter d'autres alertes ici
   ];
@@ -66,7 +68,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     <View style={{flex: 1, backgroundColor}}>
       <View style={[styles.header, { backgroundColor: isDarkMode ? '#393838' : Colors.lightGray }]}>
         <Image source={require('../assets/logo.png')} style={styles.smallLogo} />
-        <Text style={[styles.title, { color: textColor }]}>HomeScreen</Text>
+        <Text style={[styles.title, { color: textColor }]}>{t('HomeScreen.Home')}</Text>
         <TouchableOpacity onPress={toggleTheme} style={styles.themeToggleButton}>
             <Icon name={themeIcon} size={30} color={textColor} />
         </TouchableOpacity>
@@ -76,7 +78,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         
         <Animated.View style={[styles.container, { opacity: fadeAnim }]}>        
         <View style={[styles.controlCenter, { backgroundColor: isDarkMode ? '#393838' : '#f8f8f8' }]}>
-            <Text style={[styles.controlCenterText, { color: textColor }]}>Centre de Contrôle</Text>
+            <Text style={[styles.controlCenterText, { color: textColor }]}>{t('HomeScreen.ControlPanel')}</Text>
             {systemAlerts.map(alert => (
               <View key={alert.id} style={styles.alertItem}>
                 <Ionicons name="alert-circle" size={20} color="red" />
@@ -88,12 +90,12 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           <View style={[styles.cardContainer, { backgroundColor: isDarkMode ? '#393838' : Colors.lightGray }]}>
             <TouchableOpacity style={[styles.card, styles.cardHistory]} onPress={() => navigation.navigate('History')}>
               <Icon name="time-outline" size={30} color="#fff" />
-              <Text style={styles.cardText}>Historique</Text>
+              <Text style={styles.cardText}>{t('HomeScreen.History')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={[styles.card, styles.cardNotif]} onPress={() => navigation.navigate('Notif')}>
               <Icon name="notifications-outline" size={30} color="#fff" />
-              <Text style={styles.cardText}>Notifications</Text>
+              <Text style={styles.cardText}>{t('HomeScreen.Notifications')}</Text>
             </TouchableOpacity>
             
             
@@ -111,7 +113,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             />
         </Animated.View>
         <TouchableOpacity style={styles.logoutButton} onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.logoutButtonText}>Se Déconnecter</Text>
+            <Text style={styles.logoutButtonText}>{t('HomeScreen.SignOut')}</Text>
           </TouchableOpacity>
       </ScrollView>
       

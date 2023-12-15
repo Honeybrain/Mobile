@@ -1,0 +1,59 @@
+{
+  "HomeScreen": {
+    "Home": "Acceuil",
+    "History": "Historique",
+    "Notifications": "Notifications",
+    "ControlPanel": "Centre de contrôle",
+    "AttackDetected": "Une attaque détectée sur votre site",
+    "IPBlocked": "IP bloquée suite à une attaque",
+    "SignOut": "Se dééconnecter"
+  },
+  "IPScreen": {
+    "Connexions": "Connexions",
+    "IPAddress": "Adresses IP",
+    "Notifications": "Notifications",
+    "State": "État",
+    "Action": "Action",
+    "Blocked": "bloqué",
+    "NotBlocked": "non bloqué",
+    "Block": "bloquer",
+    "Unblock": "débloquer"
+  },
+  "LoginScreen": {
+    "UsernameEmail": "Nom d'utilisateur / Email",
+    "Password": "mot de passe",
+    "ConnectionSuccessful": "Connexion réussi",
+    "ConnectionFailed": "Erreur lors de la connexion: ",
+    "ConnectYourself": "Connectez-vous",
+    "Login": "connection"
+  },
+  "NotifScreen": {
+    "HoneypotNotifications": "Notifications Honeypot",
+    "SearchInNotifications": "Rechercher dans les notifications",
+    "AccessAttempt": "Tentative d'accès depuis l'IP ",
+    "PortScanDetected": "Scan de port détecté depuis l'IP",
+    "BrutForceAttack": "Attaque de force brute sur le port",
+    "DOSAttack": "Attaque DoS détectée depuis l'IP"
+
+  },
+  "SettingsScreen": {
+    "ChangePassword": "Changer le mot de passe",
+    "ChangeEmailAdress": "Changer l'addresse email",
+    "Validate": "Valider",
+    "French": "Francais",
+    "English": "Anglais",
+    "Spanish": "Espagnol",
+    "Chinese": "Chinois"
+  },
+  "WelcomeScreen": {
+    "WelcomeHoneybrain": "Bienvenue sur l'app Honeybrain!",
+    "Login": "connexion"
+  },
+  "History": {
+    "ActionHistory": "Historique d'action",
+    "All": "Tout",
+    "Attacks": "Attaques",
+    "Danger": "Danger"
+  }
+}
+
