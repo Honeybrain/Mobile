@@ -14,7 +14,10 @@ const NavBar: React.FC<NavBarProps> = ({ navigation }) => {
       <NavBarItem icon="🔒" onPress={() => navigation.navigate('Ip')} />
       <NavBarItem 
         iconComponent={<Image source={require('../assets/container.png')} style={styles.imageIcon} />}
-        onPress={() => navigation.navigate('Container')} icon={''}      />
+        onPress={() => navigation.navigate('Container')} icon={''} />
+      <NavBarItem 
+        iconComponent={<Image source={require('../assets/greenarrowdown.png')} style={styles.imageIcon} />}
+        onPress={() => navigation.navigate('EC')} icon={''} />
       <NavBarItem icon="⚙️" onPress={() => navigation.navigate('Settings')} />
     </View>
   );

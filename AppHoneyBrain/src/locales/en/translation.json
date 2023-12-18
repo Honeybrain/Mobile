@@ -38,6 +38,8 @@
     "DOSAttack": "DoS attack detected from IP"
   },
   "SettingsScreen": {
+    "SettingsPage": "Settings",
+    "ChangeLanguage": "Change language",
     "ChangePassword": "Change password",
     "ChangeEmailAdress": "Change email address",
     "Validate": "Validate",
@@ -56,6 +58,9 @@
     "Date:": "Date: ",
     "Time:": "Time: ",
     "Description:": "Description: "
+  },
+  "ECScreen": {
+    "EnteringConnections": "Entering connections"
   }
 }
 

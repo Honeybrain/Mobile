@@ -9,4 +9,5 @@ export type RootStackParamList = {
   Main: undefined;
   History: undefined;
   Notif: undefined;
+  EC: undefined;
 };
