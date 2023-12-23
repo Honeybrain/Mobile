@@ -5,6 +5,7 @@ import { Styles } from '../styles/Styles';
 import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
+import useChangeMailRPC from '../hooks/useChangeMailRPC';
 
 type SettingsScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Settings'>;
@@ -14,15 +15,20 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('fr');
+  const [submittedEmail, setSubmittedEmail] = React.useState<boolean>(false);
 
   const handleChangePassword = () => {
     // Mettez ici la logique pour changer de mot de passe
     // Vous pouvez utiliser des modals ou des alertes pour gérer cela.
   };
 
-  const handleChangeEmail = () => {
-    // Mettez ici la logique pour changer d'adresse email
-    // Vous pouvez utiliser des modals ou des alertes pour gérer cela.
+  const changeEmail = async () => {
+    try {
+      await useChangeMailRPC(email);
+      setSubmittedEmail(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleLanguageChange = (index: number, value: string) => {
@@ -39,7 +45,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
         onChangeText={text => setPassword(text)}
         value={password}
       />
-      <TouchableOpacity style={Styles.button} onPress={handleChangeEmail} >
+      <TouchableOpacity style={Styles.button} onPress={handleChangePassword} >
         <Text style={Styles.buttonText}>Valider</Text>
       </TouchableOpacity>
 
@@ -49,7 +55,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
         onChangeText={text => setEmail(text)}
         value={email}
       />
-      <TouchableOpacity style={Styles.button} onPress={handleChangeEmail} >
+      <TouchableOpacity style={Styles.button} onPress={changeEmail} >
         <Text style={Styles.buttonText}>Valider</Text>
       </TouchableOpacity>
 
