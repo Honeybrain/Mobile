@@ -12,6 +12,7 @@ type SettingsScreenProps = {
 };
 
 const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
+  const { changeMail } = useChangeMailRPC();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('fr');
@@ -24,7 +25,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
 
   const changeEmail = async () => {
     try {
-      await useChangeMailRPC(email);
+      await changeMail(email);
       setSubmittedEmail(true);
     } catch (error) {
       console.error(error);
