@@ -6,6 +6,8 @@
     "ControlPanel": "Centre de contrôle",
     "AttackDetected": "Une attaque détectée sur votre site",
     "IPBlocked": "IP bloquée suite à une attaque",
+    "Attack": "Attaque",
+    "Threat": "Menace",
     "SignOut": "Se dééconnecter"
   },
   "IPScreen": {
@@ -37,6 +39,8 @@
 
   },
   "SettingsScreen": {
+    "SettingsPage": "Paramètre",
+    "ChangeLanguage": "Change la langue",
     "ChangePassword": "Changer le mot de passe",
     "ChangeEmailAdress": "Changer l'addresse email",
     "Validate": "Valider",
@@ -54,6 +58,9 @@
     "All": "Tout",
     "Attacks": "Attaques",
     "Danger": "Danger"
+  },
+  "ECScreen": {
+    "EnteringConnections": "Connection entrantes"
   }
 }
 

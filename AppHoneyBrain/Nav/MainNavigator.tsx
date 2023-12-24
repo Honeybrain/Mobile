@@ -4,6 +4,7 @@ import HomeScreen from '../src/HomeScreen';
 import SettingsScreen from '../src/SettingsScreen';
 import IpScreen from '../src/IpScreen';
 import ContainerScreen from '../src/ContainerScreen';
+import EnteringConnections from "../src/ECSCreen"
 import NavBar from './NavBar';
 
 const Stack = createStackNavigator();
@@ -20,6 +21,7 @@ const MainNavigator: React.FC = () => (
     <Stack.Screen name="Settings" component={SettingsScreen} />
     <Stack.Screen name="Ip" component={IpScreen} />
     <Stack.Screen name="Container" component={ContainerScreen} />
+    <Stack.Screen name="EC" component={EnteringConnections} />
   </Stack.Navigator>
 );
 

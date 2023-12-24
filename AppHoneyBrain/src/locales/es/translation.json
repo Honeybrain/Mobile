@@ -38,6 +38,8 @@
     "DOSAttack": "Ataque DoS detectado desde IP"
   },
   "SettingsScreen": {
+    "SettingsPage": "ajustes",
+    "ChangeLanguage": "cambiar idioma",
     "ChangePassword": "Cambiar la contraseña",
     "ChangeEmailAdress": "Cambiar dirección de correo electrónico",
     "Validate": "Validar",
@@ -55,6 +57,9 @@
     "All": "Todo",
     "Attacks": "Ataques",
     "Danger": "Peligro"
+  },
+  "ECScreen": {
+    "EnteringConnections": "Ingresando conexiones"
   }
 }
 

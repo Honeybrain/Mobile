@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Button } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import ModalDropdown from 'react-native-modal-dropdown';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
-import RNPickerSelect from 'react-native-picker-select';
 import { useTranslation } from "react-i18next";
 
 type SettingsScreenProps = {
@@ -17,7 +16,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   const { i18n } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [selectedLanguage, setSelectedLanguage] = useState('fr');
+  const [selectedLanguage, setSelectedLanguage] = useState(0);
 
   const handleChangePassword = () => {
     // Mettez ici la logique pour changer de mot de passe
@@ -29,10 +28,11 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
     // Vous pouvez utiliser des modals ou des alertes pour gérer cela.
   };
 
-  const HandleLanguageSwitch = (newLang: string) => {
+  const HandleLanguageChange = (index: number, newLang: string) => {
+    const languages = ['fr', 'en', 'es', 'ch']
     if (newLang !== null) {
-      i18n.changeLanguage(newLang);
-      setSelectedLanguage(newLang);
+      i18n.changeLanguage(languages[index]);
+      setSelectedLanguage(index);
       // try {
       //   changeLanguage(newLang);
       // } catch(error) {
@@ -66,18 +66,16 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
       </TouchableOpacity>
 
       <Text style={{ color: 'black', fontWeight: 'bold', marginTop: 10 }}>{t('SettingsScreen.ChangeLanguage')}:</Text>
-      <TouchableOpacity style={GlobalStyles.button}>
-        <RNPickerSelect
-              onValueChange={(value) => HandleLanguageSwitch(value)}
-              items={[
-                  { label: `🇫🇷 ${t('SettingsScreen.French')}`, value: 'fr' },
-                  { label: `🏴󠁧󠁢󠁥󠁮󠁧󠁿 ${t('SettingsScreen.English')}`, value: 'en' },
-                  { label: `🇪🇸 ${t('SettingsScreen.Spanish')}`, value: 'es' },
-                  { label: `🇨🇳 ${t('SettingsScreen.Chinese')}`, value: 'ch' },
-              ]}
-          />
-      </TouchableOpacity>
-
+      <ModalDropdown
+        options={[`🇫🇷 ${t('SettingsScreen.French')}`,
+                  `🏴󠁧󠁢󠁥󠁮󠁧󠁿 ${t('SettingsScreen.English')}`,
+                  `🇪🇸 ${t('SettingsScreen.Spanish')}`,
+                  `🇨🇳 ${t('SettingsScreen.Chinese')}`]}
+        onSelect={(index: number, value: string) => HandleLanguageChange(index, value)}
+        style={{ borderColor: 'gray', borderWidth: 1, height: 40, width: '30%', marginTop: 10, backgroundColor: 'white', justifyContent: 'center', paddingLeft: 10 }}
+        dropdownStyle={{marginTop: -26, height: 80, width: "30%", marginLeft: -10, paddingLeft: 0}}
+        defaultIndex={selectedLanguage}
+      />
       <NavBar navigation={navigation} />
       
     </View>

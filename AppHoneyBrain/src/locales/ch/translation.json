@@ -38,6 +38,8 @@
     "DOSAttack": "从 IP 检测到的 DoS 攻击"
   },
   "SettingsScreen": {
+    "SettingsPage": "设置",
+    "ChangeLanguage": "改变语言",
     "ChangePassword": "更改密码",
     "ChangeEmailAdress": "更改电子邮件地址",
     "Validate": "验证",
@@ -55,6 +57,9 @@
     "All": "全部",
     "Attacks": "攻击",
     "Danger": "危险"
+  },
+  "ECScreen": {
+    "EnteringConnections": "输入连接"
   }
 }
 

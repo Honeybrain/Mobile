@@ -13,6 +13,7 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.primary,
     marginBottom: 20,
+    marginTop: 15,
     textAlign: 'center'
   },
   input: {
