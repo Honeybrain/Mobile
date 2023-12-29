@@ -9,6 +9,7 @@ import { RootStackParamList } from '../Nav/navigationTypes';
 type WelcomeScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Welcome'>;
 };
+console.disableYellowBox = true; 
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => (
   <View style={GlobalStyles.container}>

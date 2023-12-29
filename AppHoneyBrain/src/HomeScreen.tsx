@@ -63,7 +63,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   );
 
   return (
-    <View style={{flex: 1, backgroundColor}}>
+    <View style={{flex: 1, backgroundColor: isDarkMode ? '#393838' : Colors.lightGray}}>
       <View style={[styles.header, { backgroundColor: isDarkMode ? '#393838' : Colors.lightGray }]}>
         <Image source={require('../assets/logo.png')} style={styles.smallLogo} />
         <Text style={[styles.title, { color: textColor }]}>HomeScreen</Text>
