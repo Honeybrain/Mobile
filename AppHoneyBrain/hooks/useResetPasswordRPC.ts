@@ -15,7 +15,7 @@ const useResetPasswordRPC = () => {
     await client.resetPassword(request, {
       meta: { Authorization: `Bearer ${token}` },
     });
-  }, []);
+  }, [token]);
 
   return {
     resetPassword,

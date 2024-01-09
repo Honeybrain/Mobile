@@ -43,7 +43,7 @@ export interface IUserClient {
     /**
      * @generated from protobuf rpc: InviteUser(user.InviteUserRequest) returns (user.EmptyResponse);
      */
-    inviteUser(input: InviteUserRequest, options?: RpcOptions): UnaryCall<InviteUserRequest, EmptyResponse>;
+    inviteUser(input: InviteUserRequest, options?: RpcOptions): UnaryCall<InviteUserRequest, EmptyResponse>; 
     /**
      * @generated from protobuf rpc: ActivateUser(user.ActivateUserRequest) returns (user.ActivateUserResponse);
      */

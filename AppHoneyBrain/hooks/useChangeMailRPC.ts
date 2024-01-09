@@ -13,7 +13,7 @@ const useChangeMailRPC = () => {
     await client.changeEmail(request, {
       meta: { Authorization: `Bearer ${token}` },
     });
-  }, []);
+  }, [token]);
 
   return {
     changeMail,

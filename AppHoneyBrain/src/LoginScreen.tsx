@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, ToastAndroid, Image } from 'react-native';
+import React, { useState, useContext} from 'react';
+import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
-import useSignInRPC from '../hooks/useSignInRPC'; // Import the custom hook for sign-in
+import AuthContext from '../contexts/AuthContext';
 
 type LoginScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>;
@@ -12,16 +12,16 @@ type LoginScreenProps = {
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { signIn } = useSignInRPC(); // Initialize the signIn function from the useSignInRPC hook
+  const { login } = useContext(AuthContext);
+
 
   const handleSubmit = async () => {
     try {
-      const token = await signIn(email, password); // Attempt to sign in with provided credentials
-      ToastAndroid.show("Connexion réussie, token=" + token, ToastAndroid.SHORT);
-      navigation.navigate('Home'); // Navigate to Home upon successful login
+      // Appel de la méthode login avec email et mot de passe
+      await login(email, password);
+      navigation.navigate('Home');
+      // Gestion de la navigation ou des actions post-connexion ici
     } catch (error) {
-      ToastAndroid.show("Erreur lors de la connexion", ToastAndroid.SHORT);
-      console.error('Erreur lors de la connexion:', error);
     }
   };
 
