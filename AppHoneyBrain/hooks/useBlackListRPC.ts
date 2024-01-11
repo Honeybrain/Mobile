@@ -2,11 +2,13 @@ import React from "react";
 import { transport } from "../environment";
 import { BlacklistClient } from '../protos/blacklist.client';
 import { GetBlackListRequest, PutWhiteListRequest, PutBlackListRequest} from '../protos/blacklist';
+import AuthContext from "../contexts/AuthContext";
 
 const useBlackListRPC = () => {
   const client = React.useMemo(() => new BlacklistClient(transport), []);
   const [blacklist, setBlacklist] = React.useState<string[] | undefined>();
   const controller = new AbortController();
+  const { token } = React.useContext(AuthContext);
 
   const getBlackList = React.useCallback(async () => {
     const request: GetBlackListRequest = GetBlackListRequest.create();
@@ -15,19 +17,19 @@ const useBlackListRPC = () => {
     stream.responses.onNext((message) => {
       setBlacklist(message?.ips);
     });
-  }, []);
+  }, [token]);
 
   const putBlackList = React.useCallback(async (ip: string) => {
     const request: PutBlackListRequest = PutBlackListRequest.create();
     request.ip = ip;
     await client.putBlackList(request, {});
-  }, []);
+  }, [token]);
 
   const putWhiteList = React.useCallback(async (ip: string) => {
     const request: PutWhiteListRequest = PutWhiteListRequest.create();
     request.ip = ip;
     await client.putWhiteList(request, {});;
-  }, []);
+  }, [token]);
 
   React.useEffect(() => {
     getBlackList();

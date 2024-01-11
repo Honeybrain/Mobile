@@ -7,9 +7,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
 import useChangeMailRPC from '../hooks/useChangeMailRPC';
 import useResetPasswordRPC from '../hooks/useResetPasswordRPC';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import AuthContext from '../contexts/AuthContext';
-import { ToastAndroid } from 'react-native';
+import { ToastAndroid } from 'react-native'; 
 
 type SettingsScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Settings'>;
@@ -21,36 +19,20 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('fr');
-  const [submittedEmail, setSubmittedEmail] = React.useState<boolean>(false);
-  const [submittedPassword, setSubmittedPassword] = React.useState<boolean>(false);
-  // const { token} = useContext(AuthContext);
-
-  // useEffect(() => {
-  //   const getToken = async () => {
-  //     const storedToken = await AsyncStorage.getItem('userToken');
-  //     if (storedToken) {
-  //       setToken(storedToken);
-  //     }
-  //   };
-
-  //   getToken();
-  // }, []);
 
 
   const handleChangePassword = async () => {
     try {
       await resetPassword(password);
-      setSubmittedPassword(true);
       ToastAndroid.show('Votre mot de passe a bien été modifié', ToastAndroid.SHORT);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const changeEmail = async () => {
+  const handleChangeEmail = async () => {
     try {
       await changeMail(email);
-      setSubmittedEmail(true);
       ToastAndroid.show('Votre adresse email a bien été modifiée', ToastAndroid.SHORT);
     } catch (error) {
       console.error(error);
@@ -81,7 +63,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
         onChangeText={text => setEmail(text)}
         value={email}
       />
-      <TouchableOpacity style={Styles.button} onPress={changeEmail} >
+      <TouchableOpacity style={Styles.button} onPress={handleChangeEmail} >
         <Text style={Styles.buttonText}>Valider</Text>
       </TouchableOpacity>
 
