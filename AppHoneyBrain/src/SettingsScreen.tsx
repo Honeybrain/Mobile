@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
-import { GlobalStyles } from '../styles/GlobalStyles';
+import { Styles } from '../styles/Styles';
 import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
+import useChangeMailRPC from '../hooks/useChangeMailRPC';
+import useResetPasswordRPC from '../hooks/useResetPasswordRPC';
+import { ToastAndroid } from 'react-native'; 
+import { GlobalStyles } from '../styles/GlobalStyles';
 import { useTranslation } from "react-i18next";
 
 type SettingsScreenProps = {
@@ -12,20 +16,35 @@ type SettingsScreenProps = {
 };
 
 const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
+  const { changeMail } = useChangeMailRPC();
+  const { resetPassword } = useResetPasswordRPC();
   const { t } = useTranslation();
   const { i18n } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState(0);
 
-  const handleChangePassword = () => {
-    // Mettez ici la logique pour changer de mot de passe
-    // Vous pouvez utiliser des modals ou des alertes pour gérer cela.
+
+  const handleChangePassword = async () => {
+    try {
+      await resetPassword(password);
+      ToastAndroid.show('Votre mot de passe a bien été modifié', ToastAndroid.SHORT);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleChangeEmail = () => {
-    // Mettez ici la logique pour changer d'adresse email
-    // Vous pouvez utiliser des modals ou des alertes pour gérer cela.
+  const handleChangeEmail = async () => {
+    try {
+      await changeMail(email);
+      ToastAndroid.show('Votre adresse email a bien été modifiée', ToastAndroid.SHORT);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleLanguageChange = (index: number, value: string) => {
+    setSelectedLanguage(value);
   };
 
   const HandleLanguageChange = (index: number, newLang: string) => {
@@ -42,8 +61,8 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   }
 
   return (
-    <View style={GlobalStyles.container}>
-      <Text style={GlobalStyles.title}>{t('SettingsScreen.SettingsPage')}</Text>
+    <View style={Styles.container}>
+      <Text style={Styles.title}>{t('SettingsScreen.SettingsPage')}</Text>
       {/* Bouton "Changer de mot de passe" */}
       <Text style={{ color: 'black', fontWeight: 'bold', marginTop: 10 }}>{t('SettingsScreen.ChangePassword')}:</Text>
       <TextInput
@@ -51,8 +70,8 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
         onChangeText={text => setPassword(text)}
         value={password}
       />
-      <TouchableOpacity style={GlobalStyles.button} onPress={handleChangeEmail} >
-        <Text style={GlobalStyles.buttonText}>{t('SettingsScreen.Validate')}</Text>
+      <TouchableOpacity style={Styles.button} onPress={handleChangePassword} >
+        <Text style={Styles.buttonText}>{t('SettingsScreen.Validate')}</Text>
       </TouchableOpacity>
 
       <Text style={{ color: 'black', fontWeight: 'bold', marginTop: 10 }}>{t('SettingsScreen.ChangeEmailAdress')}:</Text>
@@ -61,9 +80,17 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
         onChangeText={text => setEmail(text)}
         value={email}
       />
-      <TouchableOpacity style={GlobalStyles.button} onPress={handleChangeEmail} >
-        <Text style={GlobalStyles.buttonText}>{t('SettingsScreen.Validate')}</Text>
+      <TouchableOpacity style={Styles.button} onPress={handleChangeEmail} >
+        <Text style={Styles.buttonText}>{t('SettingsScreen.Validate')}</Text>
       </TouchableOpacity>
+
+      <Text style={{ color: 'black', fontWeight: 'bold', marginTop: 10 }}>Changer de langue:</Text>
+      <ModalDropdown
+        options={['🇫🇷 Français', '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Anglais', '🇪🇸 Espagnol', '🇨🇳 Chinois']}
+        onSelect={(index: number, value: string) => handleLanguageChange(index, value)}
+        defaultValue={selectedLanguage}
+        style={{ borderColor: 'gray', borderWidth: 1, height: 40, width: '60%', marginTop: 10, backgroundColor: 'white', justifyContent: 'center', paddingLeft: 10 }}
+      />
 
       <Text style={{ color: 'black', fontWeight: 'bold', marginTop: 10 }}>{t('SettingsScreen.ChangeLanguage')}:</Text>
       <ModalDropdown
@@ -77,7 +104,6 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
         defaultIndex={selectedLanguage}
       />
       <NavBar navigation={navigation} />
-      
     </View>
   );
 };
