@@ -13,6 +13,7 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.primary,
     marginBottom: 20,
+    marginTop: 15,
     textAlign: 'center'
   },
   input: {
@@ -66,5 +67,60 @@ export const GlobalStyles = StyleSheet.create({
     width: '33%',
     fontWeight: 'bold',
     textAlign: 'center'
+  },
+  //HistoryPage 
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: Colors.lightGray,
+    borderRadius: 5,
+    padding: 10,
+  },
+  filterContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 10,
+  },
+  filterButton: {
+    padding: 10,
+    borderRadius: 5,
+    marginHorizontal: 5,
+    backgroundColor: Colors.secondary,
+  },
+  filterButtonActive: {
+    backgroundColor: Colors.tertiary,
+  },
+  filterButtonText: {
+    color: Colors.white,
+    fontWeight: 'bold',
+  },
+  listItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 5,
+    marginVertical: 5,
+    backgroundColor: Colors.lightGray,
+    shadowColor: Colors.dark,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  listItemDangerous: {
+    backgroundColor: '#ffe0e0',
+  },
+  listItemSafe: {
+    backgroundColor: '#e0ffe0',
+  },
+  listItemText: {
+    flex: 1,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: Colors.darkText,
+  },
+  listItemSubText: {
+    color: Colors.darkGray,
   },
 });

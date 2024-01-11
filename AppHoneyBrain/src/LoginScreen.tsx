@@ -1,15 +1,21 @@
 import React, { useState, useContext} from 'react';
-import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
 import AuthContext from '../contexts/AuthContext';
+import { View, Text, TouchableOpacity, TextInput, Alert, Image, StyleSheet } from 'react-native';
+import { useTranslation } from "react-i18next";
+// import AuthContext from '../../../Frontend/src//AuthContext';
+import { withTheme } from '../NightMode/HOC';
+
 
 type LoginScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>;
+  themedStyles: any; 
 };
 
-const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
+const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, themedStyles }) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { login } = useContext(AuthContext);
@@ -28,16 +34,16 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   return (
     <View style={GlobalStyles.container}>
       <Image source={require('../assets/honeybrainlogo.png')} resizeMode="contain" style={{ width: 105, height: 125 }} />
-      <Text style={GlobalStyles.title}>Connectez-vous</Text>
+      <Text style={GlobalStyles.title}>{t('LoginScreen.ConnectYourself')}</Text>
 
       <TextInput 
-        placeholder="Username / Email" 
+        placeholder={t('LoginScreen.UsernameEmail')} 
         style={GlobalStyles.input} 
         onChangeText={setEmail} // Directly pass setEmail as the handler
       />
 
       <TextInput 
-        placeholder="Password" 
+        placeholder={t('LoginScreen.Password')}
         secureTextEntry 
         style={GlobalStyles.input} 
         onChangeText={setPassword} // Directly pass setPassword as the handler
@@ -58,4 +64,4 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   );
 };
 
-export default LoginScreen;
+export default withTheme(LoginScreen);

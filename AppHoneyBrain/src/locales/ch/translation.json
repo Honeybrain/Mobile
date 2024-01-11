@@ -1,0 +1,65 @@
+{
+  "HomeScreen": {
+    "Home": "家",
+    "History": "历史",
+    "Notifications": "通知",
+    "ControlPanel": "控制面板",
+    "AttackDetected": "在您的网站上检测到攻击",
+    "IPBlocked": "攻击后 IP 被封锁",
+    "Attack": "攻击",
+    "Threat": "威胁",
+    "SignOut": "登出"
+  },
+  "IPScreen": {
+    "Connexions": "连接",
+    "IPAddress": "IP 地址",
+    "Notifications": "通知",
+    "State": "状态",
+    "Action": "行动",
+    "Blocked": "已阻止",
+    "NotBlocked": "未阻止",
+    "Block": "块",
+    "Unblock": "解除封锁"
+  },
+  "LoginScreen": {
+    "UsernameEmail": "用户名 / 电子邮件",
+    "Password": "密码",
+    "ConnectionSuccessful": "您已连接成功",
+    "ConnectionFailed": "连接时出错：",
+    "ConnectYourself": "连接你自己",
+    "Login": "登录"
+  },
+  "NotifScreen": {
+    "HoneypotNotifications": "蜜罐通知",
+    "SearchInNotifications": "在通知中搜索...",
+    "AccessAttempt": "尝试从IP访问",
+    "PortScanDetected": "从 IP 检测到端口扫描",
+    "BrutForceAttack": "端口暴力攻击",
+    "DOSAttack": "从 IP 检测到的 DoS 攻击"
+  },
+  "SettingsScreen": {
+    "SettingsPage": "设置",
+    "ChangeLanguage": "改变语言",
+    "ChangePassword": "更改密码",
+    "ChangeEmailAdress": "更改电子邮件地址",
+    "Validate": "验证",
+    "French": "法语",
+    "English": "英语",
+    "Spanish": "西班牙语",
+    "Chinese": "中国人"
+  },
+  "WelcomeScreen": {
+    "WelcomeHoneybrain": "欢迎使用 Honeybrain 应用程序！",
+    "Login": "登录"
+  },
+  "History": {
+    "ActionHistory": "动作历史",
+    "All": "全部",
+    "Attacks": "攻击",
+    "Danger": "危险"
+  },
+  "ECScreen": {
+    "EnteringConnections": "输入连接"
+  }
+}
+

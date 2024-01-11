@@ -1,0 +1,66 @@
+{
+  "HomeScreen": {
+    "Home": "Home",
+    "History": "History",
+    "Notifications": "Notifications",
+    "ControlPanel": "Control panel",
+    "AttackDetected": "an attack has been detected on your website",
+    "IPBlocked": "IP blocked following the attack",
+    "Attack": "Attack",
+    "Threat": "Threat",
+    "SignOut": "Sign out"
+  },
+  "IPScreen": {
+    "Connexions": "Connections",
+    "IPAddress": "IP Addresses",
+    "Notifications": "Notifications",
+    "State": "State",
+    "Action": "Action",
+    "Blocked": "Blocked",
+    "NotBlocked": "Not blocked",
+    "Block": "Block",
+    "Unblock": "Unblock"
+  },
+  "LoginScreen": {
+    "UsernameEmail": "Username / Email",
+    "Password": "Password",
+    "ConnectionSuccessful": "You have successfully connected",
+    "ConnectionFailed": "Error while connecting: ",
+    "ConnectYourself": "Connect yourself",
+    "Login": "Login"
+  },
+  "NotifScreen": {
+    "HoneypotNotifications": "Honeypot Notifications",
+    "SearchInNotifications": "Search in the notifications...",
+    "AccessAttempt": "Attempt to access from the IP",
+    "PortScanDetected": "Port scan detected from IP",
+    "BrutForceAttack": "Brute force attack on the port",
+    "DOSAttack": "DoS attack detected from IP"
+  },
+  "SettingsScreen": {
+    "SettingsPage": "Settings",
+    "ChangeLanguage": "Change language",
+    "ChangePassword": "Change password",
+    "ChangeEmailAdress": "Change email address",
+    "Validate": "Validate",
+    "French": "French",
+    "English": "English",
+    "Spanish": "Spanish",
+    "Chinese": "Chinese"
+  },
+  "WelcomeScreen": {
+    "WelcomeHoneybrain": "Welcome on the Honeybrain app!",
+    "Login": "Login"
+  },
+  "HistoryScreen": {
+    "ActionHistory": "Action history",
+    "SearchByAction": "Search by actions...",
+    "Date:": "Date: ",
+    "Time:": "Time: ",
+    "Description:": "Description: "
+  },
+  "ECScreen": {
+    "EnteringConnections": "Entering connections"
+  }
+}
+

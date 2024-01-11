@@ -11,6 +11,7 @@ import ContainerScreen from '../src/ContainerScreen';
 import MainNavigator from './MainNavigator';
 import History from '../src/HistoryScreen';
 import Notif from '../src/NotifScreen';
+import EnteringConnections from '../src/ECSCreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -26,6 +27,7 @@ const AppNavigator: React.FC = () => (
     <Stack.Screen name="Main" component={MainNavigator} />
     <Stack.Screen name="History" component={History} />
     <Stack.Screen name="Notif" component={Notif} />
+    <Stack.Screen name="EC" component={EnteringConnections} />
   </Stack.Navigator>
   
 );

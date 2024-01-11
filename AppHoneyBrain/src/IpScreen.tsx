@@ -5,6 +5,7 @@ import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
 import useBlackListRPC from '../hooks/useBlackListRPC';
+import { useTranslation } from "react-i18next";
 
 
 type IpScreenProps = {
@@ -18,6 +19,7 @@ type IP = {
 };
 
 const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
+  const { t } = useTranslation();
   const fakeIP: IP[] = [
     { id: 1, address: '192.168.0.1', state: false },
     { id: 2, address: '192.168.0.2', state: false },
@@ -36,15 +38,15 @@ const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
 
     return (
       <View style={rowStyle}>
-        <Text style={[Styles.columnIP, isEvenRow && { color: 'white' }]}>{address}</Text>
-        {state ? <Text style={[Styles.columnIP, isEvenRow && { color: 'white' }]}>Bloquée</Text> 
-        :<Text style={[Styles.columnIP, isEvenRow && { color: 'white' }]}>Non bloquée</Text>}
+        <Text style={[GlobalStyles.columnIP, isEvenRow && { color: 'white' }]}>{address}</Text>
+        {state ? <Text style={[GlobalStyles.columnIP, isEvenRow && { color: 'white' }]}>{t('IPScreen.Blocked')}</Text> 
+        :<Text style={[GlobalStyles.columnIP, isEvenRow && { color: 'white' }]}>{t('IPScreen.NotBlocked')}</Text>}
         {state ? 
-          <TouchableOpacity style={{ ...Styles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
-          <Text style={{ color: 'black', fontWeight: 'bold' }}>Bloquer</Text>
+          <TouchableOpacity style={{ ...GlobalStyles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
+          <Text style={{ color: 'black', fontWeight: 'bold' }}>{t('IPScreen.Block')}</Text>
           </TouchableOpacity>
-          : <TouchableOpacity style={{ ...Styles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
-          <Text style={{ color: 'black', fontWeight: 'bold' }}>Débloquer</Text>
+          : <TouchableOpacity style={{ ...GlobalStyles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
+          <Text style={{ color: 'black', fontWeight: 'bold' }}>{t('IPScreen.Unblock')}</Text>
           </TouchableOpacity>}
       </View>
     );
@@ -56,12 +58,12 @@ const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={Styles.container}>
-      <Text style={Styles.title2}>Connexions</Text>
-      <View style={Styles.row}>
-        <Text style={Styles.columnHeaderIP}>Adressse IP</Text>
-        <Text style={Styles.columnHeaderIP}>État</Text>
-        <Text style={Styles.columnHeaderIP}>Action</Text>
+    <View style={GlobalStyles.container}>
+      <Text style={GlobalStyles.title}>{t('IPScreen.Connexions')}</Text>
+      <View style={GlobalStyles.row}>
+        <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.IPAddress')}</Text>
+        <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.State')}</Text>
+        <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.Action')}</Text>
       </View>
       <FlatList
         data={fakeIP}

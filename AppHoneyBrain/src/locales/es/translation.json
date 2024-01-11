@@ -1,0 +1,65 @@
+{
+  "HomeScreen": {
+    "Home": "Inicio",
+    "History": "Historia",
+    "Notifications": "Notificaciones",
+    "ControlPanel": "Control panel",
+    "AttackDetected": "Se ha detectado un ataque en su sitio web.",
+    "IPBlocked": "IP bloqueada tras el ataque",
+    "Attack": "ataque",
+    "Threat": "amenaza",
+    "SignOut": "desconectar"
+  },
+  "IPScreen": {
+    "Connexions": "Conexiones",
+    "IPAddress": "Direcciones IP",
+    "Notifications": "Notificaciones",
+    "State": "Estado",
+    "Action": "Acción",
+    "Blocked": "Obstruida",
+    "NotBlocked": "No bloqueado",
+    "Block": "Bloquear",
+    "Unblock": "Desatascar"
+  },
+  "LoginScreen": {
+    "UsernameEmail": "Nombre de usuario / Email",
+    "Password": "Contraseña",
+    "ConnectionSuccessful": "Te has conectado exitosamente",
+    "ConnectionFailed": "Error al conectar: ",
+    "ConnectYourself": "Conéctate",
+    "Login": "Acceso"
+  },
+  "NotifScreen": {
+    "HoneypotNotifications": "Honeypot Notificaciones",
+    "SearchInNotifications": "Busca en las notificaciones...",
+    "AccessAttempt": "Intento de acceso desde la IP",
+    "PortScanDetected": "Escaneo de puertos detectado desde IP",
+    "BrutForceAttack": "Ataque de fuerza bruta al puerto",
+    "DOSAttack": "Ataque DoS detectado desde IP"
+  },
+  "SettingsScreen": {
+    "SettingsPage": "ajustes",
+    "ChangeLanguage": "cambiar idioma",
+    "ChangePassword": "Cambiar la contraseña",
+    "ChangeEmailAdress": "Cambiar dirección de correo electrónico",
+    "Validate": "Validar",
+    "French": "Francés",
+    "English": "Ingles",
+    "Spanish": "Español",
+    "Chinese": "Chino"
+  },
+  "WelcomeScreen": {
+    "WelcomeHoneybrain": "¡Bienvenido a la aplicación Honeybrain!",
+    "Login": "Acceso"
+  },
+  "History": {
+    "ActionHistory": "Historial de acción",
+    "All": "Todo",
+    "Attacks": "Ataques",
+    "Danger": "Peligro"
+  },
+  "ECScreen": {
+    "EnteringConnections": "Ingresando conexiones"
+  }
+}
+
