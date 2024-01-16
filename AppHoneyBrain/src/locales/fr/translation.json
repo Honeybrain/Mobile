@@ -40,7 +40,7 @@
   },
   "SettingsScreen": {
     "SettingsPage": "Paramètre",
-    "ChangeLanguage": "Change la langue",
+    "ChangeLanguage": "Changer la langue",
     "ChangePassword": "Changer le mot de passe",
     "ChangeEmailAdress": "Changer l'addresse email",
     "Validate": "Valider",
@@ -61,6 +61,13 @@
   },
   "ECScreen": {
     "EnteringConnections": "Connection entrantes"
+  },
+  "ContainerScreen": {
+    "containerList": "Liste des containers",
+    "Name": "Nom",
+    "State": "État",
+    "IPAddress": "Adresses IP",
+    "Action": "Action"
   }
 }
 
