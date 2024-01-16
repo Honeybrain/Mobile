@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, FlatList} from 'react-native';
-import { GlobalStyles } from '../styles/GlobalStyles';
+import { Styles } from '../styles/Styles';
 import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
+import useBlackListRPC from '../hooks/useBlackListRPC';
 import { useTranslation } from "react-i18next";
 
 
@@ -27,11 +28,13 @@ const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
     { id: 5, address: '192.168.0.6', state: false }
 
   ];
+  const { blacklist } = useBlackListRPC();
+  console.log("BlackList: ", blacklist);
 
   const renderItem = ({ item, index }: { item: IP, index: number }) => {
     const {id,  address, state} = item; // Extraire les propriétés de item
     const isEvenRow = index % 2 === 0;
-    const rowStyle = isEvenRow ? { ...GlobalStyles.row, backgroundColor: 'blue' } : GlobalStyles.row;
+    const rowStyle = isEvenRow ? { ...Styles.row, backgroundColor: 'blue' } : Styles.row;
 
     return (
       <View style={rowStyle}>

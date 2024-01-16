@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, Button, FlatList, TouchableOpacity } from 'react-native';
-import { GlobalStyles } from '../styles/GlobalStyles';
+import { Styles } from '../styles/Styles';
 import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList} from '../Nav/navigationTypes';
+import useContainersRPC from '../hooks/useContainersRPC';
 import { useTranslation } from "react-i18next";
-
 
 type ContainerScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Container'>;
@@ -28,19 +28,22 @@ const ContainerScreen: React.FC<ContainerScreenProps> = ({ navigation }) => {
     { id: 5, name: 'Container 5', state: 'Running', ipAddress: '192.168.0.3' },
     // Ajoutez autant de containers que nécessaire
   ];
+  
+  const { containers } = useContainersRPC();
+  console.log("Containers: ", containers);
 
   const renderItem = ({ item, index }: { item: Container, index: number }) => {
     const { name, state, ipAddress } = item; // Extraire les propriétés de item
   
     const isEvenRow = index % 2 === 0;
-    const rowStyle = isEvenRow ? { ...GlobalStyles.row, backgroundColor: 'blue' } : GlobalStyles.row;
+    const rowStyle = isEvenRow ? { ...Styles.row, backgroundColor: 'blue' } : Styles.row;
   
     return (
       <View style={rowStyle}>
-        <Text style={[GlobalStyles.column, isEvenRow && { color: 'white' }]}>{name}</Text>
-        <Text style={[GlobalStyles.column, isEvenRow && { color: 'white' }]}>{state}</Text>
-        <Text style={[GlobalStyles.column, isEvenRow && { color: 'white' }]}>{ipAddress}</Text>
-        <TouchableOpacity style={GlobalStyles.button} onPress={() => handleStopContainer(item.id)}>
+        <Text style={[Styles.column, isEvenRow && { color: 'white' }]}>{name}</Text>
+        <Text style={[Styles.column, isEvenRow && { color: 'white' }]}>{state}</Text>
+        <Text style={[Styles.column, isEvenRow && { color: 'white' }]}>{ipAddress}</Text>
+        <TouchableOpacity style={Styles.button} onPress={() => handleStopContainer(item.id)}>
           <Text style={{ color: 'black', fontWeight: 'bold' }}>Stop</Text>
         </TouchableOpacity>
       </View>
@@ -55,13 +58,13 @@ const ContainerScreen: React.FC<ContainerScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={GlobalStyles.container}>
-      <Text style={GlobalStyles.title2}>Liste des containers</Text>
-      <View style={GlobalStyles.row}>
-        <Text style={GlobalStyles.columnHeader}>Nom</Text>
-        <Text style={GlobalStyles.columnHeader}>État</Text>
-        <Text style={GlobalStyles.columnHeader}>Adresse IP</Text>
-        <Text style={GlobalStyles.columnHeader}>Action</Text>
+    <View style={Styles.container}>
+      <Text style={Styles.title2}>Liste des containers</Text>
+      <View style={Styles.row}>
+        <Text style={Styles.columnHeader}>Nom</Text>
+        <Text style={Styles.columnHeader}>État</Text>
+        <Text style={Styles.columnHeader}>Adresse IP</Text>
+        <Text style={Styles.columnHeader}>Action</Text>
       </View>
       <FlatList
         data={fakeContainers}
