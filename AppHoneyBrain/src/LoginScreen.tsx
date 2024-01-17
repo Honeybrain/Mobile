@@ -24,7 +24,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, themedStyles }) =
   const handleSubmit = async () => {
     try {
       // Appel de la méthode login avec email et mot de passe
-      await login(email, password);
+      //await login(email, password);
       navigation.navigate('Home');
       // Gestion de la navigation ou des actions post-connexion ici
     } catch (error) {

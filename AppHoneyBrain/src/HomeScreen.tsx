@@ -48,10 +48,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     { id: 3, image: require('../assets/dashboard.png')},
   ];
 
-  const Separator = () => (
-    <View style={styles.separator} />
-  );
-  const renderCarouselItem = ({ item }) => (
+  const renderCarouselItem = ({ item}) => (
     <TouchableOpacity onPress={() => {/* Votre action ici */}}>
       <View>
         <Image source={item.image} style={styles.featuredImage} />
@@ -65,7 +62,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   );
 
   return (
-    <View style={{flex: 1, backgroundColor}}>
+    <SafeAreaView style={{flex: 1, backgroundColor}}>
       <View style={[styles.header, { backgroundColor: isDarkMode ? '#393838' : Colors.lightGray }]}>
         <Image source={require('../assets/logo.png')} style={styles.smallLogo} />
         <Text style={[styles.title, { color: textColor }]}>{t('HomeScreen.Home')}</Text>
@@ -81,7 +78,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             <Text style={[styles.controlCenterText, { color: textColor }]}>{t('HomeScreen.ControlPanel')}</Text>
             {systemAlerts.map(alert => (
               <View key={alert.id} style={styles.alertItem}>
-                <Ionicons name="alert-circle" size={20} color="red" />
+                <Ionicons name="alert-circle" size={1} color="red" />
                 <Text style={[styles.alertType, { color: textColor }]}>{alert.type}</Text>
                 <Text style={[styles.alertMessage, { color: textColor }]}>{alert.message}</Text>
               </View>
@@ -97,8 +94,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
               <Icon name="notifications-outline" size={30} color="#fff" />
               <Text style={styles.cardText}>{t('HomeScreen.Notifications')}</Text>
             </TouchableOpacity>
-            
-            
           </View>
   
           <Carousel
@@ -106,7 +101,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             renderItem={renderCarouselItem}
             sliderWidth={viewportWidth}
             itemWidth={300}
-            itemHeight={400}
             autoplay={true}
             loop={true}
             style={{backgroundColor: 'black'}}
@@ -114,15 +108,16 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         </Animated.View>
         <TouchableOpacity style={styles.logoutButton} onPress={() => navigation.navigate('Login')}>
             <Text style={styles.logoutButtonText}>{t('HomeScreen.SignOut')}</Text>
-          </TouchableOpacity>
+        </TouchableOpacity>
       </ScrollView>
       
       <NavBar navigation={navigation} />
-    </View>
+    </SafeAreaView>
+
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ 
   separator: {
     width: '100%',
     height: 1, // ou 'width: 1' pour une ligne verticale
@@ -145,8 +140,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 32,
-    padding: 4,
+    marginTop: 55,
+    padding: 0,
   },
   headerContainer: {
     flexDirection: 'row',
@@ -162,7 +157,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#f8f8f8', // Adjust according to theme
     borderRadius: 15,
-    margin: 16,
+    margin: 12,
   },
   controlCenterTitle: {
     fontWeight: 'bold',
@@ -194,6 +189,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     paddingTop: 0,
+    paddingBottom: 150,
   },
   container: {
     flex: 1,
@@ -213,11 +209,11 @@ const styles = StyleSheet.create({
     width: '110%',
     height: '25%',
     marginBottom: 12,
-    marginTop: 12,
+    marginTop: 6,
     backgroundColor:'#f8f8f8',
   },
   card: {
-    width: '45%',
+    width: '5%',
     padding: 20,
     borderRadius: 30,
     alignItems: 'center',
@@ -248,8 +244,8 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     backgroundColor: '#f44336',
-    padding: 15,
-    borderRadius: 20,
+    padding: 10,
+    borderRadius: 12,
     marginLeft: '10%',
     width: '80%',
     alignItems: 'center',
@@ -267,7 +263,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 175,
     borderRadius: 30,
-    marginBottom: 40,
+    marginBottom: 24,
     marginTop: 8
   },
 });
