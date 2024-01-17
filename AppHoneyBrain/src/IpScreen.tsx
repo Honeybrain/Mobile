@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, FlatList} from 'react-native';
 import { Styles } from '../styles/Styles';
+//import { GlobalStyles } from '../styles/GlobalStyles';
 import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
@@ -38,14 +39,14 @@ const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
 
     return (
       <View style={rowStyle}>
-        <Text style={[GlobalStyles.columnIP, isEvenRow && { color: 'white' }]}>{address}</Text>
-        {state ? <Text style={[GlobalStyles.columnIP, isEvenRow && { color: 'white' }]}>{t('IPScreen.Blocked')}</Text> 
-        :<Text style={[GlobalStyles.columnIP, isEvenRow && { color: 'white' }]}>{t('IPScreen.NotBlocked')}</Text>}
+        <Text style={[Styles.columnIP, isEvenRow && { color: 'white' }]}>{address}</Text>
+        {state ? <Text style={[Styles.columnIP, isEvenRow && { color: 'white' }]}>{t('IPScreen.Blocked')}</Text> 
+        :<Text style={[Styles.columnIP, isEvenRow && { color: 'white' }]}>{t('IPScreen.NotBlocked')}</Text>}
         {state ? 
-          <TouchableOpacity style={{ ...GlobalStyles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
+          <TouchableOpacity style={{ ...Styles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
           <Text style={{ color: 'black', fontWeight: 'bold' }}>{t('IPScreen.Block')}</Text>
           </TouchableOpacity>
-          : <TouchableOpacity style={{ ...GlobalStyles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
+          : <TouchableOpacity style={{ ...Styles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
           <Text style={{ color: 'black', fontWeight: 'bold' }}>{t('IPScreen.Unblock')}</Text>
           </TouchableOpacity>}
       </View>
@@ -58,12 +59,12 @@ const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={GlobalStyles.container}>
-      <Text style={GlobalStyles.title}>{t('IPScreen.Connexions')}</Text>
-      <View style={GlobalStyles.row}>
-        <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.IPAddress')}</Text>
-        <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.State')}</Text>
-        <Text style={GlobalStyles.columnHeaderIP}>{t('IPScreen.Action')}</Text>
+    <View style={Styles.container}>
+      <Text style={Styles.title}>{t('IPScreen.Connexions')}</Text>
+      <View style={Styles.row}>
+        <Text style={Styles.columnHeaderIP}>{t('IPScreen.IPAddress')}</Text>
+        <Text style={Styles.columnHeaderIP}>{t('IPScreen.State')}</Text>
+        <Text style={Styles.columnHeaderIP}>{t('IPScreen.Action')}</Text>
       </View>
       <FlatList
         data={fakeIP}
