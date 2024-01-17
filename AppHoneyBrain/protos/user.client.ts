@@ -4,8 +4,10 @@
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
 import { User } from "./user";
+import type { UserLanguageResponse } from "./user";
+import type { UserRequest } from "./user";
+import type { ChangeLanguageRequest } from "./user";
 import type { GetUsersResponse } from "./user";
-import type { EmptyRequest } from "./user";
 import type { ChangeRightsRequest } from "./user";
 import type { ActivateUserResponse } from "./user";
 import type { ActivateUserRequest } from "./user";
@@ -13,6 +15,8 @@ import type { InviteUserRequest } from "./user";
 import type { EmailRequest } from "./user";
 import type { EmptyResponse } from "./user";
 import type { PasswordRequest } from "./user";
+import type { UserDto } from "./user";
+import type { EmptyRequest } from "./user";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
 import type { UserResponse } from "./user";
 import type { SignInSignUpRequest } from "./user";
@@ -33,6 +37,10 @@ export interface IUserClient {
      */
     signUp(input: SignInSignUpRequest, options?: RpcOptions): UnaryCall<SignInSignUpRequest, UserResponse>;
     /**
+     * @generated from protobuf rpc: GetMe(user.EmptyRequest) returns (user.UserDto);
+     */
+    getMe(input: EmptyRequest, options?: RpcOptions): UnaryCall<EmptyRequest, UserDto>;
+    /**
      * @generated from protobuf rpc: ResetPassword(user.PasswordRequest) returns (user.EmptyResponse);
      */
     resetPassword(input: PasswordRequest, options?: RpcOptions): UnaryCall<PasswordRequest, EmptyResponse>;
@@ -41,17 +49,17 @@ export interface IUserClient {
      */
     changeEmail(input: EmailRequest, options?: RpcOptions): UnaryCall<EmailRequest, EmptyResponse>;
     /**
-     * @generated from protobuf rpc: InviteUser(user.InviteUserRequest) returns (user.EmptyResponse);
+     * @generated from protobuf rpc: InviteUser(user.InviteUserRequest) returns (user.UserDto);
      */
-    inviteUser(input: InviteUserRequest, options?: RpcOptions): UnaryCall<InviteUserRequest, EmptyResponse>; 
+    inviteUser(input: InviteUserRequest, options?: RpcOptions): UnaryCall<InviteUserRequest, UserDto>;
     /**
      * @generated from protobuf rpc: ActivateUser(user.ActivateUserRequest) returns (user.ActivateUserResponse);
      */
     activateUser(input: ActivateUserRequest, options?: RpcOptions): UnaryCall<ActivateUserRequest, ActivateUserResponse>;
     /**
-     * @generated from protobuf rpc: ChangeRights(user.ChangeRightsRequest) returns (user.EmptyResponse);
+     * @generated from protobuf rpc: ChangeRights(user.ChangeRightsRequest) returns (user.UserDto);
      */
-    changeRights(input: ChangeRightsRequest, options?: RpcOptions): UnaryCall<ChangeRightsRequest, EmptyResponse>;
+    changeRights(input: ChangeRightsRequest, options?: RpcOptions): UnaryCall<ChangeRightsRequest, UserDto>;
     /**
      * @generated from protobuf rpc: GetUsers(user.EmptyRequest) returns (user.GetUsersResponse);
      */
@@ -60,6 +68,14 @@ export interface IUserClient {
      * @generated from protobuf rpc: DeleteUser(user.EmailRequest) returns (user.EmptyResponse);
      */
     deleteUser(input: EmailRequest, options?: RpcOptions): UnaryCall<EmailRequest, EmptyResponse>;
+    /**
+     * @generated from protobuf rpc: ChangeLanguage(user.ChangeLanguageRequest) returns (user.EmptyResponse);
+     */
+    changeLanguage(input: ChangeLanguageRequest, options?: RpcOptions): UnaryCall<ChangeLanguageRequest, EmptyResponse>;
+    /**
+     * @generated from protobuf rpc: GetUserLanguage(user.UserRequest) returns (user.UserLanguageResponse);
+     */
+    getUserLanguage(input: UserRequest, options?: RpcOptions): UnaryCall<UserRequest, UserLanguageResponse>;
 }
 /**
  * The UserService defines the methods that our service exposes
@@ -87,52 +103,73 @@ export class UserClient implements IUserClient, ServiceInfo {
         return stackIntercept<SignInSignUpRequest, UserResponse>("unary", this._transport, method, opt, input);
     }
     /**
+     * @generated from protobuf rpc: GetMe(user.EmptyRequest) returns (user.UserDto);
+     */
+    getMe(input: EmptyRequest, options?: RpcOptions): UnaryCall<EmptyRequest, UserDto> {
+        const method = this.methods[2], opt = this._transport.mergeOptions(options);
+        return stackIntercept<EmptyRequest, UserDto>("unary", this._transport, method, opt, input);
+    }
+    /**
      * @generated from protobuf rpc: ResetPassword(user.PasswordRequest) returns (user.EmptyResponse);
      */
     resetPassword(input: PasswordRequest, options?: RpcOptions): UnaryCall<PasswordRequest, EmptyResponse> {
-        const method = this.methods[2], opt = this._transport.mergeOptions(options);
+        const method = this.methods[3], opt = this._transport.mergeOptions(options);
         return stackIntercept<PasswordRequest, EmptyResponse>("unary", this._transport, method, opt, input);
     }
     /**
      * @generated from protobuf rpc: ChangeEmail(user.EmailRequest) returns (user.EmptyResponse);
      */
     changeEmail(input: EmailRequest, options?: RpcOptions): UnaryCall<EmailRequest, EmptyResponse> {
-        const method = this.methods[3], opt = this._transport.mergeOptions(options);
+        const method = this.methods[4], opt = this._transport.mergeOptions(options);
         return stackIntercept<EmailRequest, EmptyResponse>("unary", this._transport, method, opt, input);
     }
     /**
-     * @generated from protobuf rpc: InviteUser(user.InviteUserRequest) returns (user.EmptyResponse);
+     * @generated from protobuf rpc: InviteUser(user.InviteUserRequest) returns (user.UserDto);
      */
-    inviteUser(input: InviteUserRequest, options?: RpcOptions): UnaryCall<InviteUserRequest, EmptyResponse> {
-        const method = this.methods[4], opt = this._transport.mergeOptions(options);
-        return stackIntercept<InviteUserRequest, EmptyResponse>("unary", this._transport, method, opt, input);
+    inviteUser(input: InviteUserRequest, options?: RpcOptions): UnaryCall<InviteUserRequest, UserDto> {
+        const method = this.methods[5], opt = this._transport.mergeOptions(options);
+        return stackIntercept<InviteUserRequest, UserDto>("unary", this._transport, method, opt, input);
     }
     /**
      * @generated from protobuf rpc: ActivateUser(user.ActivateUserRequest) returns (user.ActivateUserResponse);
      */
     activateUser(input: ActivateUserRequest, options?: RpcOptions): UnaryCall<ActivateUserRequest, ActivateUserResponse> {
-        const method = this.methods[5], opt = this._transport.mergeOptions(options);
+        const method = this.methods[6], opt = this._transport.mergeOptions(options);
         return stackIntercept<ActivateUserRequest, ActivateUserResponse>("unary", this._transport, method, opt, input);
     }
     /**
-     * @generated from protobuf rpc: ChangeRights(user.ChangeRightsRequest) returns (user.EmptyResponse);
+     * @generated from protobuf rpc: ChangeRights(user.ChangeRightsRequest) returns (user.UserDto);
      */
-    changeRights(input: ChangeRightsRequest, options?: RpcOptions): UnaryCall<ChangeRightsRequest, EmptyResponse> {
-        const method = this.methods[6], opt = this._transport.mergeOptions(options);
-        return stackIntercept<ChangeRightsRequest, EmptyResponse>("unary", this._transport, method, opt, input);
+    changeRights(input: ChangeRightsRequest, options?: RpcOptions): UnaryCall<ChangeRightsRequest, UserDto> {
+        const method = this.methods[7], opt = this._transport.mergeOptions(options);
+        return stackIntercept<ChangeRightsRequest, UserDto>("unary", this._transport, method, opt, input);
     }
     /**
      * @generated from protobuf rpc: GetUsers(user.EmptyRequest) returns (user.GetUsersResponse);
      */
     getUsers(input: EmptyRequest, options?: RpcOptions): UnaryCall<EmptyRequest, GetUsersResponse> {
-        const method = this.methods[7], opt = this._transport.mergeOptions(options);
+        const method = this.methods[8], opt = this._transport.mergeOptions(options);
         return stackIntercept<EmptyRequest, GetUsersResponse>("unary", this._transport, method, opt, input);
     }
     /**
      * @generated from protobuf rpc: DeleteUser(user.EmailRequest) returns (user.EmptyResponse);
      */
     deleteUser(input: EmailRequest, options?: RpcOptions): UnaryCall<EmailRequest, EmptyResponse> {
-        const method = this.methods[8], opt = this._transport.mergeOptions(options);
+        const method = this.methods[9], opt = this._transport.mergeOptions(options);
         return stackIntercept<EmailRequest, EmptyResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * @generated from protobuf rpc: ChangeLanguage(user.ChangeLanguageRequest) returns (user.EmptyResponse);
+     */
+    changeLanguage(input: ChangeLanguageRequest, options?: RpcOptions): UnaryCall<ChangeLanguageRequest, EmptyResponse> {
+        const method = this.methods[10], opt = this._transport.mergeOptions(options);
+        return stackIntercept<ChangeLanguageRequest, EmptyResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * @generated from protobuf rpc: GetUserLanguage(user.UserRequest) returns (user.UserLanguageResponse);
+     */
+    getUserLanguage(input: UserRequest, options?: RpcOptions): UnaryCall<UserRequest, UserLanguageResponse> {
+        const method = this.methods[11], opt = this._transport.mergeOptions(options);
+        return stackIntercept<UserRequest, UserLanguageResponse>("unary", this._transport, method, opt, input);
     }
 }

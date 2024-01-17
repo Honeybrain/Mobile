@@ -27,6 +27,20 @@ export interface PutBlackListRequest {
 export interface PutBlackListReply {
 }
 /**
+ * @generated from protobuf message blacklist.BlockCountryRequest
+ */
+export interface BlockCountryRequest {
+    /**
+     * @generated from protobuf field: string countryCode = 1;
+     */
+    countryCode: string;
+}
+/**
+ * @generated from protobuf message blacklist.BlockCountryReply
+ */
+export interface BlockCountryReply {
+}
+/**
  * @generated from protobuf message blacklist.GetBlackListRequest
  */
 export interface GetBlackListRequest {
@@ -127,6 +141,79 @@ class PutBlackListReply$Type extends MessageType<PutBlackListReply> {
  * @generated MessageType for protobuf message blacklist.PutBlackListReply
  */
 export const PutBlackListReply = new PutBlackListReply$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class BlockCountryRequest$Type extends MessageType<BlockCountryRequest> {
+    constructor() {
+        super("blacklist.BlockCountryRequest", [
+            { no: 1, name: "countryCode", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<BlockCountryRequest>): BlockCountryRequest {
+        const message = { countryCode: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<BlockCountryRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: BlockCountryRequest): BlockCountryRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string countryCode */ 1:
+                    message.countryCode = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: BlockCountryRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string countryCode = 1; */
+        if (message.countryCode !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.countryCode);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message blacklist.BlockCountryRequest
+ */
+export const BlockCountryRequest = new BlockCountryRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class BlockCountryReply$Type extends MessageType<BlockCountryReply> {
+    constructor() {
+        super("blacklist.BlockCountryReply", []);
+    }
+    create(value?: PartialMessage<BlockCountryReply>): BlockCountryReply {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<BlockCountryReply>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: BlockCountryReply): BlockCountryReply {
+        return target ?? this.create();
+    }
+    internalBinaryWrite(message: BlockCountryReply, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message blacklist.BlockCountryReply
+ */
+export const BlockCountryReply = new BlockCountryReply$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class GetBlackListRequest$Type extends MessageType<GetBlackListRequest> {
     constructor() {
@@ -278,6 +365,7 @@ export const PutWhiteListReply = new PutWhiteListReply$Type();
  */
 export const Blacklist = new ServiceType("blacklist.Blacklist", [
     { name: "PutBlackList", options: {}, I: PutBlackListRequest, O: PutBlackListReply },
+    { name: "BlockCountry", options: {}, I: BlockCountryRequest, O: BlockCountryReply },
     { name: "GetBlackList", serverStreaming: true, options: {}, I: GetBlackListRequest, O: GetBlackListReply },
     { name: "PutWhiteList", options: {}, I: PutWhiteListRequest, O: PutWhiteListReply }
 ]);
