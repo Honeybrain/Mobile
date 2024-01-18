@@ -61,6 +61,13 @@
   },
   "ECScreen": {
     "EnteringConnections": "Entering connections"
+  },
+  "ContainerScreen": {
+    "containerList": "container list",
+    "Name": "Name",
+    "State": "State",
+    "IPAddress": "IP Addresses",
+    "Action": "Action"
   }
 }
 

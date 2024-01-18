@@ -4,7 +4,7 @@ import HomeScreen from '../src/HomeScreen';
 import SettingsScreen from '../src/SettingsScreen';
 import IpScreen from '../src/IpScreen';
 import ContainerScreen from '../src/ContainerScreen';
-import EnteringConnections from "../src/ECSCreen"
+import EnteringConnections from "../src/ECScreen"
 import NavBar from './NavBar';
 
 const Stack = createStackNavigator();

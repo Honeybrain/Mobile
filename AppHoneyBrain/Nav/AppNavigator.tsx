@@ -11,7 +11,7 @@ import ContainerScreen from '../src/ContainerScreen';
 import MainNavigator from './MainNavigator';
 import History from '../src/HistoryScreen';
 import Notif from '../src/NotifScreen';
-import EnteringConnections from '../src/ECSCreen';
+import EnteringConnections from '../src/ECScreen';
 import { HaveRoles } from '../_utils/function/have-roles';
 import { RoleEnum } from "../protos/user";
 import AuthContext from '../contexts/AuthContext';

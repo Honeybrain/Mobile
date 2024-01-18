@@ -25,6 +25,7 @@ const ContainerScreen: React.FC<ContainerScreenProps> = ({ navigation }) => {
   const { isDarkMode } = useContext(ThemeContext); // Utilisation du ThemeContext
   const containerBackgroundColor = isDarkMode ? '#333' : '#fff';
   const textColor = isDarkMode ? 'white' : 'black';
+  const { t } = useTranslation();
   console.log("Containers: ", containers);
   
   React.useEffect(() => {
@@ -57,12 +58,12 @@ const ContainerScreen: React.FC<ContainerScreenProps> = ({ navigation }) => {
 
   return (
     <View style={[Styles.container, { backgroundColor: containerBackgroundColor }]}>
-      <Text style={[Styles.title2, { color: textColor }]}>Liste des containers</Text>
+      <Text style={[Styles.title2, { color: textColor }]}>{t('ContainerScreen.containerList')}</Text>
       <View style={Styles.row}>
-        <Text style={[Styles.columnHeader, { color: textColor }]}>Nom</Text>
-        <Text style={[Styles.columnHeader, { color: textColor }]}>État</Text>
-        <Text style={[Styles.columnHeader, { color: textColor }]}>Adresse IP</Text>
-        <Text style={[Styles.columnHeader, { color: textColor }]}>Action</Text>
+        <Text style={[Styles.columnHeader, { color: textColor }]}>{t('ContainerScreen.Name')}</Text>
+        <Text style={[Styles.columnHeader, { color: textColor }]}>{t('ContainerScreen.State')}</Text>
+        <Text style={[Styles.columnHeader, { color: textColor }]}>{t('ContainerScreen.IPAddress')}</Text>
+        <Text style={[Styles.columnHeader, { color: textColor }]}>{t('ContainerScreen.Action')}</Text>
       </View>
       <FlatList
         data={containers}
