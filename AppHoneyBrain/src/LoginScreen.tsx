@@ -3,9 +3,9 @@ import { GlobalStyles } from '../styles/GlobalStyles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
 import AuthContext from '../contexts/AuthContext';
-import { View, Text, TouchableOpacity, TextInput, Alert, Image, StyleSheet } from 'react-native';
+import { ToastAndroid } from 'react-native';
 import { useTranslation } from "react-i18next";
-// import AuthContext from '../../../Frontend/src//AuthContext';
+import { View, Text, TouchableOpacity, TextInput, Alert, Image, StyleSheet } from 'react-native';
 import { withTheme } from '../NightMode/HOC';
 
 
@@ -14,7 +14,7 @@ type LoginScreenProps = {
   themedStyles: any; 
 };
 
-const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, themedStyles }) => {
+const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   const { t } = useTranslation();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -25,11 +25,14 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, themedStyles }) =
   const handleSubmit = async () => {
     try {
       // Appel de la méthode login avec email et mot de passe
-      // await login(email, password);
-      navigation.navigate('Home');
+      const loginSucces= await login(email, password);
+      if (loginSucces) {
+        navigation.navigate('Home');
+      }
       // Gestion de la navigation ou des actions post-connexion ici
     } catch (error) {
-      setError('Adresse e-mail ou mot de passe incorrect.');
+      ToastAndroid.show("Erreur lors de la connexion", ToastAndroid.SHORT);
+      console.error('Erreur lors de la connexion:', error);
     }
   };
 
