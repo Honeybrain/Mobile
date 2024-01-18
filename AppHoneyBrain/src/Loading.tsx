@@ -1,11 +1,11 @@
 // components/Loading.tsx
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { View, ActivityIndicator, Image, StyleSheet } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
 import { useTranslation } from "react-i18next";
-
+import { ThemeContext } from '../NightMode/ThemeContext';
 
 type LoadingProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Loading'>;
@@ -13,7 +13,9 @@ type LoadingProps = {
 
 const Loading: React.FC<LoadingProps> = ({ navigation }) => {
   const { t } = useTranslation();
-  
+  const { isDarkMode } = useContext(ThemeContext); // Utilisez ThemeContext
+  const backgroundColor = isDarkMode ? '#333' : 'white';
+  const activityIndicatorColor = isDarkMode ? 'white' : '#003061';
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('Welcome');
@@ -21,12 +23,14 @@ const Loading: React.FC<LoadingProps> = ({ navigation }) => {
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor }]}>
       <Image source={require('../assets/honeybrainlogo.png')} style={styles.logo} />
-      <ActivityIndicator size="large" color="#003061" />
+      <ActivityIndicator size="large" color={activityIndicatorColor} />
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {

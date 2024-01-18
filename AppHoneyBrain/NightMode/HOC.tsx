@@ -12,7 +12,10 @@ export const withTheme = (Component: React.ComponentType<any>) => {
       cardStyle: isDarkMode ? styles.darkCard : styles.lightCard,
       textStyle: isDarkMode ? styles.darkText : styles.lightText,
       timestampStyle: isDarkMode ? styles.darkTimestamp : styles.lightTimestamp,
-      // ... autres styles conditionnels
+      textInputStyle: {
+        color: isDarkMode ? 'white' : 'black', // Couleur du texte dans le TextInput
+        // Ajoutez ici d'autres styles conditionnels si nécessaire
+      },
     };
 
     return <Component {...props} themedStyles={themedStyles} />;
@@ -20,6 +23,7 @@ export const withTheme = (Component: React.ComponentType<any>) => {
 };
 
 const styles = StyleSheet.create({
+  
   lightContainer: {
     backgroundColor: 'white',
   },

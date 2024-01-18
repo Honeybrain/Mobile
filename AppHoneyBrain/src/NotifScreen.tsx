@@ -5,6 +5,7 @@ import { GlobalStyles } from '../styles/GlobalStyles';
 import { Colors } from '../styles/Colors';
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from '../NightMode/ThemeContext';
+import NavBar from '../Nav/NavBar';
 
 // Définition des types et des données
 type NotificationItem = {
@@ -58,11 +59,6 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#e0e0e0',
     marginVertical: 10,
-  },
-  backArrow: {
-    position: 'absolute',
-    top: 42,
-    left: 20,
   },
 });
 
@@ -122,9 +118,6 @@ const NotificationsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.backArrow} onPress={() => navigation.navigate('Home')}>
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
       <Text style={styles.title}>{t('NotifScreen.HoneypotNotifications')}</Text>
       <TextInput
         placeholder={t('NotifScreen.SearchInNotifications')}
@@ -138,6 +131,7 @@ const NotificationsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
+     <NavBar navigation={navigation} />
     </SafeAreaView>
   );
 };
