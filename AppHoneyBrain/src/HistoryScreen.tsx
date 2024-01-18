@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { useTranslation } from "react-i18next";
 import { View, Text, TextInput, TouchableOpacity, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import NavBar from '../Nav/NavBar';
+import useGetHistoryRPC from '../hooks/useGetHistoryRPC';
 
 const styles = StyleSheet.create({
   container: {
@@ -73,13 +74,6 @@ type ActionItem = {
   status: 'safe' | 'dangerous';
 };
 
-const initialData: ActionItem[] = [
-  { id: '1', name: 'Login', date: '2023-03-15', time: '09:45', user: 'Alice', description: 'Successful login attempt', status: 'safe' },
-  { id: '2', name: 'Data Access', date: '2023-03-16', time: '10:15', user: 'Bob', description: 'Accessed confidential data', status: 'safe' },
-  { id: '3', name: 'Failed Login', date: '2023-03-17', time: '11:30', user: 'Charlie', description: 'Failed login attempt', status: 'dangerous' },
-  { id: '4', name: 'Data Modification', date: '2023-03-18', time: '13:20', user: 'Dana', description: 'Modified customer data', status: 'safe' },
-  { id: '5', name: 'Unauthorized Access', date: '2023-03-19', time: '15:00', user: 'Eve', description: 'Attempted unauthorized access', status: 'dangerous' },
-];
 
 const HistoryItem: React.FC<ActionItem> = ({ name, date, time, user, description, status }) => {
   const { t } = useTranslation();
@@ -101,9 +95,32 @@ const HistoryItem: React.FC<ActionItem> = ({ name, date, time, user, description
 };
 
 const HistoryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
-  const [data, setData] = useState<ActionItem[]>(initialData);
+  const [data, setData] = useState<ActionItem[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const { t } = useTranslation();
+  const { getHistory } = useGetHistoryRPC();
+
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const historyData = await getHistory();
+        setData(historyData.map(entry => ({
+          // Convertissez les données de l'entrée historique au format ActionItem
+          id: entry.id,
+          name: entry.actionType,
+          date: entry.date.split(' ')[0], // Supposant que la date et l'heure sont séparées par un espace
+          time: entry.date.split(' ')[1],
+          user: entry.userId, // Vous devrez peut-être adapter ceci en fonction de votre structure de données
+          description: entry.description,
+          status: 'safe' // À définir en fonction de votre logique
+        })));
+      } catch (error) {
+        console.error('Erreur lors de la récupération de l’historique :', error);
+      }
+    };
+
+    fetchHistory();
+  }, [getHistory]);
 
   const filteredData = data.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
