@@ -6,8 +6,10 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList} from '../Nav/navigationTypes';
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import DashboardContext from '../contexts/DashboardContext';
+import useDashboardRPC from '../hooks/honeypotService/useDashboardRPC';
 
-const textLines = [
+let textLines = [
   "1. A picture is worth a thousand words.",
   "2. Don't count your chickens before they hatch.",
   "3. Actions speak louder than words.",
@@ -65,6 +67,11 @@ type EnteringConnectionsProps = {
 
 const EnteringConnections: React.FC<EnteringConnectionsProps> = ({ navigation }) => {
   const { t } = useTranslation();
+  const { containers, logs, blacklist } = useDashboardRPC();
+  if (logs != undefined) {
+    console.log("logs: ", logs);
+    textLines = logs.split('\n');
+  } else
 
   return(
     <SafeAreaView style={styles.container}>
