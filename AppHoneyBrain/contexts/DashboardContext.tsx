@@ -1,4 +1,4 @@
-import { Container } from '@protos/dashboard';
+import { Container } from '../protos/dashboard';
 import { createContext } from 'react';
 
 interface DashboardContextProps {

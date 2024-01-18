@@ -59,12 +59,12 @@ const ContainerScreen: React.FC<ContainerScreenProps> = ({ navigation }) => {
 
   return (
     <View style={Styles.container}>
-      <Text style={Styles.title2}>Liste des containers</Text>
-      <View style={Styles.row}>
-        <Text style={Styles.columnHeader}>Nom</Text>
-        <Text style={Styles.columnHeader}>État</Text>
-        <Text style={Styles.columnHeader}>Adresse IP</Text>
-        <Text style={Styles.columnHeader}>Action</Text>
+    <Text style={Styles.title2}>{t('ContainerScreen.containerList')}</Text>
+    <View style={Styles.row}>
+      <Text style={Styles.columnHeader}>{t('ContainerScreen.Name')}</Text>
+      <Text style={Styles.columnHeader}>{t('ContainerScreen.State')}</Text>
+      <Text style={Styles.columnHeader}>{t('ContainerScreen.IPAddress')}</Text>
+      <Text style={Styles.columnHeader}>{t('ContainerScreen.Action')}</Text>
       </View>
       <FlatList
         data={fakeContainers}
