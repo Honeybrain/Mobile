@@ -7,6 +7,7 @@ import { RootStackParamList} from '../Nav/navigationTypes';
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../NightMode/ThemeContext';
+import useLogsRPC from '../hooks/useLogsRPC';
 
 const textLines = [
   "1. A picture is worth a thousand words.",
@@ -67,6 +68,7 @@ type EnteringConnectionsProps = {
 const EnteringConnections: React.FC<EnteringConnectionsProps> = ({ navigation }) => {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(ThemeContext);
+  const { logs } = useLogsRPC();
 
   // Styles conditionnels basés sur le mode nuit
   const containerBackgroundColor = isDarkMode ? '#333' : '#fff';
@@ -86,7 +88,7 @@ const EnteringConnections: React.FC<EnteringConnectionsProps> = ({ navigation })
             style={styles.scrollView}
             bounces={false}
           >
-          {textLines.map((line, index) => (
+          {logs.split('\n').map((line, index) => (
             <Text
               key={index}
               style={[

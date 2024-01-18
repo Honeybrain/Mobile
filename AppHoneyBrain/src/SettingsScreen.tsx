@@ -87,14 +87,6 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
         <Text style={Styles.buttonText}>{t('SettingsScreen.Validate')}</Text>
       </TouchableOpacity>
 
-      <Text style={{ color: textColor, fontWeight: 'bold', marginTop: 10 }}>Changer de langue:</Text>
-      <ModalDropdown
-        options={['🇫🇷 Français', '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Anglais', '🇪🇸 Espagnol', '🇨🇳 Chinois']}
-        onSelect={(index: number, value: string) => HandleLanguageChange(index, value)}
-        defaultValue={selectedLanguage}
-        style={{ borderColor, borderWidth: 1, height: 40, width: '60%', marginTop: 10, backgroundColor , justifyContent: 'center', paddingLeft: 10 }}
-      />
-
       <Text style={{ color: textColor, fontWeight: 'bold', marginTop: 10 }}>{t('SettingsScreen.ChangeLanguage')}:</Text>
       <ModalDropdown
         options={[`🇫🇷 ${t('SettingsScreen.French')}`,
