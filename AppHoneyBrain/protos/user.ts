@@ -125,6 +125,10 @@ export interface UserDto {
      * @generated from protobuf field: string language = 5;
      */
     language: string;
+    /**
+     * @generated from protobuf field: bool nightMode = 6;
+     */
+    nightMode: boolean;
 }
 /**
  * @generated from protobuf message user.GetUsersResponse
@@ -186,10 +190,12 @@ export interface HistoryEntryResponse {
     /**
      * @generated from protobuf field: string id = 1;
      */
-    id: string; // ID de l'entrée d'historique créée    /**
+    id: string; // ID de l'entrée d'historique créée
+    /**
      * @generated from protobuf field: string status = 2;
      */
-    status: string; // Par exemple, "success" ou "error"}
+    status: string; // Par exemple, "success" ou "error"
+}
 /**
  * @generated from protobuf message user.GetHistoryRequest
  */
@@ -693,7 +699,8 @@ class UserDto$Type extends MessageType<UserDto> {
             { no: 2, name: "email", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "roles", kind: "enum", repeat: 1 /*RepeatType.PACKED*/, T: () => ["user.RoleEnum", RoleEnum] },
             { no: 4, name: "activated", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 5, name: "language", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 5, name: "language", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 6, name: "nightMode", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<UserDto>): UserDto {
@@ -703,6 +710,7 @@ class UserDto$Type extends MessageType<UserDto> {
         message.roles = [];
         message.activated = false;
         message.language = "";
+        message.nightMode = false;
         if (value !== undefined)
             reflectionMergePartial<UserDto>(this, message, value);
         return message;
@@ -730,6 +738,9 @@ class UserDto$Type extends MessageType<UserDto> {
                     break;
                 case /* string language */ 5:
                     message.language = reader.string();
+                    break;
+                case /* bool nightMode */ 6:
+                    message.nightMode = reader.bool();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -762,6 +773,9 @@ class UserDto$Type extends MessageType<UserDto> {
         /* string language = 5; */
         if (message.language !== "")
             writer.tag(5, WireType.LengthDelimited).string(message.language);
+        /* bool nightMode = 6; */
+        if (message.nightMode !== false)
+            writer.tag(6, WireType.Varint).bool(message.nightMode);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
