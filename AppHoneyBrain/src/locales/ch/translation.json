@@ -60,6 +60,13 @@
   },
   "ECScreen": {
     "EnteringConnections": "输入连接"
+  },
+  "ContainerScreen": {
+    "containerList": "集装箱清单",
+    "Name": "姓名",
+    "State": "状态",
+    "IPAddress": "IP地址",
+    "Action": "行动"
   }
 }
 
