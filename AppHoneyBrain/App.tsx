@@ -1,3 +1,4 @@
+import "./ignoreWarnings";
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from './Nav/AppNavigator';

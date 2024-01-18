@@ -24,12 +24,16 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, themedStyles }) =
 
   const handleSubmit = async () => {
     try {
-      // Appel de la méthode login avec email et mot de passe
-      await login(email, password);
-      navigation.navigate('Home');
+      const loginSucces= await login(email, password);
+      if (loginSucces) {
+        navigation.navigate('Home');
+      }
+      else
+      {
+        setError('Adresse e-mail ou mot de passe incorrect.');
+      }
       // Gestion de la navigation ou des actions post-connexion ici
     } catch (error) {
-      setError('Adresse e-mail ou mot de passe incorrect.');
     }
   };
 
@@ -60,7 +64,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, themedStyles }) =
       </TouchableOpacity>
       {error !== '' && (
         <Text style={{ color: 'red', marginTop: 10 }}>{error}</Text>
-       )}
+       )} 
       {/* Uncomment and modify the following if you have a password recovery or registration flow */}
       {/* 
       <Text style={{ marginTop: 10, color: '#666' }}>Forgot Password?</Text>

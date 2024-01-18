@@ -6,7 +6,6 @@ import AuthContext from '../contexts/AuthContext';
 import { HaveRoles } from '../_utils/function/have-roles';
 import { RoleEnum } from "../protos/user";
 
-
 type NavBarProps = {
   navigation: StackNavigationProp<RootStackParamList, keyof RootStackParamList>;
 };
@@ -22,9 +21,10 @@ const NavBar: React.FC<NavBarProps> = ({ navigation }) => {
       <NavBarItem 
         iconComponent={<Image source={require('../assets/container.png')} style={styles.imageIcon} />}
         onPress={() => navigation.navigate('Container')} icon={''} />}
+      {HaveRoles(user, [RoleEnum.CAN_READ_LOGS]) &&
       <NavBarItem 
         iconComponent={<Image source={require('../assets/greenarrowdown.png')} style={styles.imageIcon} />}
-        onPress={() => navigation.navigate('EC')} icon={''} />
+        onPress={() => navigation.navigate('EC')} icon={''} />}
       <NavBarItem icon="⚙️" onPress={() => navigation.navigate('Settings')} />
     </View>
   );

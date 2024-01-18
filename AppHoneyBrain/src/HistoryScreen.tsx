@@ -126,8 +126,8 @@ const HistoryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         />
         <View style={{ marginLeft: 10 }}>
           <Text style={{ fontSize: 16, fontWeight: 'bold', color: textColor }}>{name.toUpperCase()} - {user}</Text>
-          <Text style={{ color: textColor }}>{date} - {time}</Text>
-          <Text style={{ color: textColor }}>{description}</Text>
+          <Text style={{ color: textColor }}>{date} {time}</Text>
+          <Text style={{ color: textColor }}>--- {description}</Text>
         </View>
       </View>
     );

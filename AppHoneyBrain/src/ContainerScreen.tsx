@@ -1,34 +1,21 @@
-import React, { useContext } from 'react';
-import { View, Text, Button, FlatList, TouchableOpacity } from 'react-native';
-import { ContainersStyles} from '../styles/ContainersStyles';
+import React, { useContext, useEffect } from 'react';
+import { View, Text, FlatList } from 'react-native';
 import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList} from '../Nav/navigationTypes';
+import { RootStackParamList } from '../Nav/navigationTypes';
 import useContainersRPC from '../hooks/useContainersRPC';
-import { useTranslation } from "react-i18next";
 import { ThemeContext } from '../NightMode/ThemeContext';
-import { Styles } from '../styles/Styles';
+import { ContainersStyles } from '../styles/ContainersStyles';
 
 type ContainerScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Container'>;
 };
 
-type Container = {
-  id: number;
-  name: string;
-  state: string;
-  ipAddress: string;
-};
-
 const ContainerScreen: React.FC<ContainerScreenProps> = ({ navigation }) => {
   const { containers, getContainers } = useContainersRPC();
-  const { isDarkMode } = useContext(ThemeContext); // Utilisation du ThemeContext
-  const containerBackgroundColor = isDarkMode ? '#333' : '#fff';
-  const textColor = isDarkMode ? 'white' : 'black';
-  const { t } = useTranslation();
-  console.log("Containers: ", containers);
-  
-  React.useEffect(() => {
+  const { isDarkMode } = useContext(ThemeContext);
+
+  useEffect(() => {
     const intervalId = setInterval(() => {
       getContainers(); 
     }, 5000);
@@ -37,38 +24,39 @@ const ContainerScreen: React.FC<ContainerScreenProps> = ({ navigation }) => {
   }, [getContainers]);
   
   const renderItem = ({ item, index }: { item: any, index: number }) => {
-    const { name, status, ip } = item; // Utilisez les nouvelles propriétés de vos données de conteneur
-    
+    const { name, status, ip } = item;
     const isEvenRow = index % 2 === 0;
-    const rowStyle = isEvenRow ? { ...Styles.row, backgroundColor: 'blue' } : Styles.row;
-    const rowBackgroundColor = isEvenRow ? 'blue' : 'transparent';
-    const rowTextColor = isEvenRow ? 'white' : textColor;
-    
+    const rowStyle = isEvenRow 
+      ? { ...ContainersStyles.row, backgroundColor: isDarkMode ? '#333' : 'blue' } 
+      : { ...ContainersStyles.row, backgroundColor: isDarkMode ? '#333' : 'white' };
+    const textStyle = { color: isDarkMode ? 'white' : (isEvenRow ? 'white' : 'black') };
+  
     return (
-      <View style={[Styles.row, { backgroundColor: rowBackgroundColor }]}>
-        <Text style={[Styles.column, isEvenRow && { color: rowTextColor }]}>{name}</Text>
-        <Text style={[Styles.column, isEvenRow && { color: rowTextColor }]}>{status}</Text>
-        <Text style={[Styles.column, isEvenRow && { color: rowTextColor }]}>{ip}</Text>
-        <TouchableOpacity style={Styles.button}>
-          <Text style={{ color: 'black', fontWeight: 'bold' }}>Stop</Text>
-        </TouchableOpacity>
+      <View style={rowStyle}>
+        <Text style={[ContainersStyles.column, textStyle]}>{name}</Text>
+        <Text style={[ContainersStyles.column, textStyle]}>{status}</Text>
+        <Text style={[ContainersStyles.column, textStyle]}>{ip}</Text>
       </View>
     );
   };
 
+  const containerStyle = {
+    ...ContainersStyles.container,
+    backgroundColor: isDarkMode ? '#333' : ContainersStyles.container.backgroundColor,
+  };
+
   return (
-    <View style={[Styles.container, { backgroundColor: containerBackgroundColor }]}>
-      <Text style={[Styles.title2, { color: textColor }]}>{t('ContainerScreen.containerList')}</Text>
-      <View style={Styles.row}>
-        <Text style={[Styles.columnHeader, { color: textColor }]}>{t('ContainerScreen.Name')}</Text>
-        <Text style={[Styles.columnHeader, { color: textColor }]}>{t('ContainerScreen.State')}</Text>
-        <Text style={[Styles.columnHeader, { color: textColor }]}>{t('ContainerScreen.IPAddress')}</Text>
-        <Text style={[Styles.columnHeader, { color: textColor }]}>{t('ContainerScreen.Action')}</Text>
+    <View style={containerStyle}>
+      <Text style={[ContainersStyles.title2, { color: isDarkMode ? 'white' : 'black' }]}>Liste des containers</Text>
+      <View style={ContainersStyles.row}>
+        <Text style={[ContainersStyles.columnHeader, { color: isDarkMode ? 'white' : 'black' }]}>Nom</Text>
+        <Text style={[ContainersStyles.columnHeader, { color: isDarkMode ? 'white' : 'black' }]}>État</Text>
+        <Text style={[ContainersStyles.columnHeader, { color: isDarkMode ? 'white' : 'black' }]}>Adresse IP</Text>
       </View>
       <FlatList
         data={containers}
         renderItem={renderItem}
-        keyExtractor={(item) => item.name} // Utilisez 'name' comme clé unique
+        keyExtractor={(item) => item.name}
       />
       <NavBar navigation={navigation} />
     </View>

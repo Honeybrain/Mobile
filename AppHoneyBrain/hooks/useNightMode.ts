@@ -29,7 +29,7 @@ const useNightMode = () => {
         meta: { Authorization: `Bearer ${await AsyncStorage.getItem('token')}` },
       });
     } catch (error) {
-      console.error('Erreur lors de la mise à jour du mode nuit', error);
+      // console.error('Erreur lors de la mise à jour du mode nuit', error);
     }
   }, [isNightMode, client]);
 
