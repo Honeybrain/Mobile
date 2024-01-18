@@ -2,19 +2,26 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
+import AuthContext from '../contexts/AuthContext';
+import { HaveRoles } from '../_utils/function/have-roles';
+import { RoleEnum } from "../protos/user";
+
 
 type NavBarProps = {
   navigation: StackNavigationProp<RootStackParamList, keyof RootStackParamList>;
 };
 
 const NavBar: React.FC<NavBarProps> = ({ navigation }) => {
+  const { user } = React.useContext(AuthContext);
   return (
     <View style={styles.container}>
       <NavBarItem icon="🏠" onPress={() => navigation.navigate('Home')} />
-      <NavBarItem icon="🔒" onPress={() => navigation.navigate('Ip')} />
+      {HaveRoles(user, [RoleEnum.CAN_READ_IP]) && 
+      <NavBarItem icon="🔒" onPress={() => navigation.navigate('Ip')} />}
+      {HaveRoles(user, [RoleEnum.CAN_READ_SERVICES]) &&
       <NavBarItem 
         iconComponent={<Image source={require('../assets/container.png')} style={styles.imageIcon} />}
-        onPress={() => navigation.navigate('Container')} icon={''} />
+        onPress={() => navigation.navigate('Container')} icon={''} />}
       <NavBarItem 
         iconComponent={<Image source={require('../assets/greenarrowdown.png')} style={styles.imageIcon} />}
         onPress={() => navigation.navigate('EC')} icon={''} />
