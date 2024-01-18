@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { useTranslation } from "react-i18next";
 import { View, Text, TextInput, TouchableOpacity, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import NavBar from '../Nav/NavBar';
 import useGetHistoryRPC from '../hooks/useGetHistoryRPC';
+import { ThemeContext } from '../NightMode/ThemeContext'; 
 
 const styles = StyleSheet.create({
   container: {
@@ -75,36 +76,19 @@ type ActionItem = {
 };
 
 
-const HistoryItem: React.FC<ActionItem> = ({ name, date, time, user, description, status }) => {
-  const { t } = useTranslation();
-
-  return(
-    <View style={styles.historyItem}>
-      <Ionicons
-        name={status === 'dangerous' ? 'alert-circle' : 'checkmark-circle'}
-        size={24}
-        color={status === 'dangerous' ? Colors.danger : Colors.safe}
-      />
-      <View style={{ marginLeft: 10 }}>
-        <Text style={styles.itemText}>{name.toUpperCase()} - {user}</Text>
-        <Text>{t('HistoryScreen.Date:')}{date} - {t('HistoryScreen.Time:')}{time}</Text>
-        <Text>{t('HistoryScreen.Description:')} {description}</Text>
-      </View>
-    </View>
-  )
-};
-
 const HistoryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [data, setData] = useState<ActionItem[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupContent, setPopupContent] = useState('');
   const { t } = useTranslation();
   const { getHistory } = useGetHistoryRPC();
+  const { isDarkMode } = useContext(ThemeContext);
 
   useEffect(() => {
     const fetchHistory = async () => {
       try {
         const historyData = await getHistory();
-        setData(historyData.map(entry => ({
+        setData(historyData.map((entry: { id: any; actionType: any; date: string; userId: any; description: any; }) => ({
           // Convertissez les données de l'entrée historique au format ActionItem
           id: entry.id,
           name: entry.actionType,
@@ -119,29 +103,60 @@ const HistoryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       }
     };
 
+    
+  
+
     fetchHistory();
   }, [getHistory]);
 
-  const filteredData = data.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const backgroundColor = isDarkMode ? '#333' : '#f0f2f5';
+  const textColor = isDarkMode ? 'white' : '#1a1a1a';
+  const itemBackgroundColor = isDarkMode ? '#1a1a1a' : '#fff';
+  const inputBackgroundColor = isDarkMode ? '#555' : '#fff';
+  const inputTextColor = isDarkMode ? 'white' : 'black';
+  const [searchTerm, setSearchTerm] = useState(''); // Ajouté pour la recherche
+
+  const HistoryItem: React.FC<ActionItem> = ({ name, date, time, user, description, status }) => {
+    return(
+      <View style={{ backgroundColor: itemBackgroundColor, padding: 15, borderRadius: 10, marginVertical: 5, flexDirection: 'row', alignItems: 'center', elevation: 3 }}>
+        <Ionicons
+          name={status === 'dangerous' ? 'alert-circle' : 'checkmark-circle'}
+          size={24}
+          color={status === 'dangerous' ? '#ff5252' : '#4caf50'}
+        />
+        <View style={{ marginLeft: 10 }}>
+          <Text style={{ fontSize: 16, fontWeight: 'bold', color: textColor }}>{name.toUpperCase()} - {user}</Text>
+          <Text style={{ color: textColor }}>{date} - {time}</Text>
+          <Text style={{ color: textColor }}>{description}</Text>
+        </View>
+      </View>
+    );
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>{t('HistoryScreen.ActionHistory')}</Text>
+    <SafeAreaView style={{ flex: 1, padding: 20, backgroundColor: backgroundColor }}>
+      <Text style={{ fontSize: 26, fontWeight: 'bold', color: textColor, marginBottom: 12, marginTop: 12, textAlign: 'center' }}>{t('HistoryScreen.ActionHistory')}</Text>
+      
+      {/* Ajout d'un champ de recherche (facultatif) */}
       <TextInput
         placeholder={t('HistoryScreen.SearchByAction')}
-        style={styles.input}
+        style={{ borderWidth: 1, borderColor: '#ddd', padding: 10, borderRadius: 20, marginBottom: 15, backgroundColor: inputBackgroundColor, color: inputTextColor }}
         value={searchTerm}
         onChangeText={setSearchTerm}
       />
+
       <FlatList
-        data={filteredData}
+        data={data.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()))}
         renderItem={({ item }) => <HistoryItem {...item} />}
-        keyExtractor={(item) => item.id}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
+        keyExtractor={(item) => `${item.id}-${item.date}-${item.time}`}
+        ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: isDarkMode ? '#444' : '#e0e0e0', marginVertical: 10 }} />}
       />
       <NavBar navigation={navigation} />
     </SafeAreaView>
   );
 };
 
+
+
 export default HistoryScreen;
+
