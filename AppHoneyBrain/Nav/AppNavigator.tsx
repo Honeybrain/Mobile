@@ -26,7 +26,7 @@ const AppNavigator: React.FC = () => {
     const commonScreens = [
       { name: "Loading", component: Loading },
       { name: "Welcome", component: WelcomeScreen },
-      { name: "Login", component: LoginScreen },
+      { name: "Login", component: LoginScreen }, 
       { name: "Home", component: HomeScreen },
       { name: "Settings", component: SettingsScreen },
       { name: "Main", component: MainNavigator },
