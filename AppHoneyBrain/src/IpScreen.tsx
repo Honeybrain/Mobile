@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, FlatList} from 'react-native';
-import { Styles } from '../styles/Styles';
-//import { GlobalStyles } from '../styles/GlobalStyles';
+import { ContainersStyles } from '../styles/ContainersStyles';
 import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Nav/navigationTypes';
@@ -22,11 +21,11 @@ type IP = {
 const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
   const { t } = useTranslation();
   const fakeIP: IP[] = [
-    { id: 1, address: '192.168.0.1', state: false },
-    { id: 2, address: '192.168.0.2', state: false },
-    { id: 3, address: '192.168.0.3', state: true },
-    { id: 4, address: '192.168.0.9', state: false },
-    { id: 5, address: '192.168.0.6', state: false }
+    { id: 1, address: '192.168.0.1', state: 'Activée' },
+    { id: 2, address: '192.168.0.2', state: 'Activée' },
+    { id: 3, address: '192.168.0.3', state: 'Désactivée' },
+    { id: 4, address: '192.168.0.9', state: 'Activée' },
+    { id: 5, address: '192.168.0.6', state: 'Désactivée' }
 
   ];
   const { blacklist } = useBlackListRPC();
@@ -35,36 +34,37 @@ const IpScreen: React.FC<IpScreenProps> = ({ navigation }) => {
   const renderItem = ({ item, index }: { item: IP, index: number }) => {
     const {id,  address, state} = item; // Extraire les propriétés de item
     const isEvenRow = index % 2 === 0;
-    const rowStyle = isEvenRow ? { ...Styles.row, backgroundColor: 'blue' } : Styles.row;
+    const rowStyle = isEvenRow ? { ...ContainersStyles.row, backgroundColor: 'blue' } : ContainersStyles.row;
 
     return (
+      // <View style={rowStyle}>
+      //   <Text style={[ContainersStyles.column, isEvenRow && { color: 'white' }]}>{address}</Text>
+      //   {state ? <Text style={[ContainersStyles.column, isEvenRow && { color: 'white' }]}>{t('IPScreen.Blocked')}</Text> 
+      //   :<Text style={[ContainersStyles.column, isEvenRow && { color: 'white' }]}>{t('IPScreen.NotBlocked')}</Text>}
+      //   {state ? 
+      //     <TouchableOpacity style={{ ...ContainersStyles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
+      //     <Text style={{ color: 'black', fontWeight: 'bold' }}>{t('IPScreen.Block')}</Text>
+      //     </TouchableOpacity>
+      //     : <TouchableOpacity style={{ ...ContainersStyles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
+      //     <Text style={{ color: 'black', fontWeight: 'bold' }}>{t('IPScreen.Unblock')}</Text>
+      //     </TouchableOpacity>}
+      // </View>
       <View style={rowStyle}>
-        <Text style={[Styles.columnIP, isEvenRow && { color: 'white' }]}>{address}</Text>
-        {state ? <Text style={[Styles.columnIP, isEvenRow && { color: 'white' }]}>{t('IPScreen.Blocked')}</Text> 
-        :<Text style={[Styles.columnIP, isEvenRow && { color: 'white' }]}>{t('IPScreen.NotBlocked')}</Text>}
-        {state ? 
-          <TouchableOpacity style={{ ...Styles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
-          <Text style={{ color: 'black', fontWeight: 'bold' }}>{t('IPScreen.Block')}</Text>
-          </TouchableOpacity>
-          : <TouchableOpacity style={{ ...Styles.button, justifyContent: 'center' }} onPress={() => handleStopContainer(item.id)}>
-          <Text style={{ color: 'black', fontWeight: 'bold' }}>{t('IPScreen.Unblock')}</Text>
-          </TouchableOpacity>}
-      </View>
+      <Text style={[ContainersStyles.column, isEvenRow && { color: 'white' }]}>{id}</Text>
+      <Text style={[ContainersStyles.column, isEvenRow && { color: 'white' }]}>{address}</Text>
+      <Text style={[ContainersStyles.column, isEvenRow && { color: 'white' }]}>{state}</Text>
+    </View>
     );
   };
 
 
-  const handleStopContainer = (containerId: number) => {
-    // Implémentez votre logique pour arrêter le conteneur avec l'ID donné.
-  };
-
   return (
-    <View style={Styles.container}>
-      <Text style={Styles.title}>{t('IPScreen.Connexions')}</Text>
-      <View style={Styles.row}>
-        <Text style={Styles.columnHeaderIP}>{t('IPScreen.IPAddress')}</Text>
-        <Text style={Styles.columnHeaderIP}>{t('IPScreen.State')}</Text>
-        <Text style={Styles.columnHeaderIP}>{t('IPScreen.Action')}</Text>
+    <View style={ContainersStyles.container}>
+      <Text style={ContainersStyles.title}>{t('IPScreen.Connexions')}</Text>
+      <View style={ContainersStyles.row}>
+        <Text style={ContainersStyles.columnHeader}>{"ID"}</Text>
+        <Text style={ContainersStyles.columnHeader}>{t('IPScreen.IPAddress')}</Text>
+        <Text style={ContainersStyles.columnHeader}>{t('IPScreen.State')}</Text>
       </View>
       <FlatList
         data={fakeIP}

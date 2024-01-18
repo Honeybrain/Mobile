@@ -1,11 +1,10 @@
 import React from 'react';
 import { View, Text, Button, FlatList, TouchableOpacity } from 'react-native';
-import { Styles } from '../styles/Styles';
+import { ContainersStyles} from '../styles/ContainersStyles';
 import NavBar from '../Nav/NavBar';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList} from '../Nav/navigationTypes';
 import useContainersRPC from '../hooks/useContainersRPC';
-import { useTranslation } from "react-i18next";
 
 type ContainerScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Container'>;
@@ -18,58 +17,45 @@ type Container = {
   ipAddress: string;
 };
 
-const ContainerScreen: React.FC<ContainerScreenProps> = ({ navigation }) => {
-  const { t } = useTranslation();
-  const fakeContainers: Container[] = [
-    { id: 1, name: 'Container 1', state: 'Running', ipAddress: '192.168.0.1' },
-    { id: 2, name: 'Container 2', state: 'Stopped', ipAddress: '192.168.0.2' },
-    { id: 3, name: 'Container 3', state: 'Running', ipAddress: '192.168.0.3' },
-    { id: 4, name: 'Container 4', state: 'Stopped', ipAddress: '192.168.0.2' },
-    { id: 5, name: 'Container 5', state: 'Running', ipAddress: '192.168.0.3' },
-    // Ajoutez autant de containers que nécessaire
-  ];
-  
-  const { containers } = useContainersRPC();
-  console.log("Containers: ", containers);
 
-  const renderItem = ({ item, index }: { item: Container, index: number }) => {
-    const { name, state, ipAddress } = item; // Extraire les propriétés de item
+const ContainerScreen: React.FC<ContainerScreenProps> = ({ navigation }) => {
+  const { containers, getContainers } = useContainersRPC();
   
+  React.useEffect(() => {
+    const intervalId = setInterval(() => {
+      getContainers(); 
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [getContainers]);
+  
+  const renderItem = ({ item, index }: { item: any, index: number }) => {
+    const { name, status, ip } = item; // Utilisez les nouvelles propriétés de vos données de conteneur
+    
     const isEvenRow = index % 2 === 0;
-    const rowStyle = isEvenRow ? { ...Styles.row, backgroundColor: 'blue' } : Styles.row;
+    const rowStyle = isEvenRow ? { ...ContainersStyles.row, backgroundColor: 'blue' } : ContainersStyles.row;
   
     return (
       <View style={rowStyle}>
-        <Text style={[Styles.column, isEvenRow && { color: 'white' }]}>{name}</Text>
-        <Text style={[Styles.column, isEvenRow && { color: 'white' }]}>{state}</Text>
-        <Text style={[Styles.column, isEvenRow && { color: 'white' }]}>{ipAddress}</Text>
-        <TouchableOpacity style={Styles.button} onPress={() => handleStopContainer(item.id)}>
-          <Text style={{ color: 'black', fontWeight: 'bold' }}>Stop</Text>
-        </TouchableOpacity>
+        <Text style={[ContainersStyles.column, isEvenRow && { color: 'white' }]}>{name}</Text>
+        <Text style={[ContainersStyles.column, isEvenRow && { color: 'white' }]}>{status}</Text>
+        <Text style={[ContainersStyles.column, isEvenRow && { color: 'white' }]}>{ip}</Text>
       </View>
     );
   };
-  
-  
-
-
-  const handleStopContainer = (containerId: number) => {
-    // Implémentez votre logique pour arrêter le conteneur avec l'ID donné.
-  };
 
   return (
-    <View style={Styles.container}>
-      <Text style={Styles.title2}>Liste des containers</Text>
-      <View style={Styles.row}>
-        <Text style={Styles.columnHeader}>Nom</Text>
-        <Text style={Styles.columnHeader}>État</Text>
-        <Text style={Styles.columnHeader}>Adresse IP</Text>
-        <Text style={Styles.columnHeader}>Action</Text>
+    <View style={ContainersStyles.container}>
+      <Text style={ContainersStyles.title2}>Liste des containers</Text>
+      <View style={ContainersStyles.row}>
+        <Text style={ContainersStyles.columnHeader}>Nom</Text>
+        <Text style={ContainersStyles.columnHeader}>État</Text>
+        <Text style={ContainersStyles.columnHeader}>Adresse IP</Text>
       </View>
       <FlatList
-        data={fakeContainers}
+        data={containers}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.name} // Utilisez 'name' comme clé unique
       />
       <NavBar navigation={navigation} />
     </View>
