@@ -49,4 +49,16 @@ export const ContainersStyles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center'
   },
+  columnIP: {
+    marginVertical: 10,
+    width: '100%',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  columnHeaderIP: {
+    marginVertical: 10,
+    width: '100%',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
   });

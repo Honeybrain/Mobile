@@ -12,21 +12,18 @@ const useBlackListRPC = () => {
 
   const getBlackList = React.useCallback(async () => {
     const request: GetBlackListRequest = GetBlackListRequest.create();
-    console.log("getBlackList1");
     try {
       const call = await client.getBlackListUnary(request, {
         meta: { Authorization: `Bearer ${token}` },
       });
       const response = call.response;
-      console.log("getBlackList2");
-      console.log(response);
       if (response && response.ips) {
         setBlacklist(response.ips);
       }
     } catch (error) {
       console.error("Erreur lors de l'appel de getBlackList:", error);
     }
-  }, [client, token]); // Inclure client et token dans les dépendances
+  }, [client, token]); 
   
 
   React.useEffect(() => {
