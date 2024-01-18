@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
   smallLogo: {
     width: 55,
     height: 50,
+    marginLeft: 2
   },
   controlCenter: {
     padding: 20,

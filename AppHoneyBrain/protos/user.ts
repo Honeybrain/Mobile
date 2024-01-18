@@ -38,6 +38,10 @@ export interface UserResponse {
      * @generated from protobuf field: string token = 2;
      */
     token: string;
+    /**
+     * @generated from protobuf field: user.UserDto user = 3;
+     */
+    user?: UserDto;
 }
 /**
  * @generated from protobuf message user.EmptyRequest
@@ -80,9 +84,9 @@ export interface InviteUserRequest {
      */
     email: string;
     /**
-     * @generated from protobuf field: bool admin = 2;
+     * @generated from protobuf field: repeated user.RoleEnum roles = 2;
      */
-    admin: boolean;
+    roles: RoleEnum[];
 }
 /**
  * @generated from protobuf message user.ChangeRightsRequest
@@ -93,18 +97,43 @@ export interface ChangeRightsRequest {
      */
     email: string;
     /**
-     * @generated from protobuf field: bool admin = 2;
+     * @generated from protobuf field: repeated user.RoleEnum roles = 2;
      */
-    admin: boolean;
+    roles: RoleEnum[];
+}
+/**
+ * @generated from protobuf message user.UserDto
+ */
+export interface UserDto {
+    /**
+     * @generated from protobuf field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from protobuf field: string email = 2;
+     */
+    email: string;
+    /**
+     * @generated from protobuf field: repeated user.RoleEnum roles = 3;
+     */
+    roles: RoleEnum[];
+    /**
+     * @generated from protobuf field: bool activated = 4;
+     */
+    activated: boolean;
+    /**
+     * @generated from protobuf field: string language = 5;
+     */
+    language: string;
 }
 /**
  * @generated from protobuf message user.GetUsersResponse
  */
 export interface GetUsersResponse {
     /**
-     * @generated from protobuf field: repeated string users = 1;
+     * @generated from protobuf field: repeated user.UserDto users = 1;
      */
-    users: string[];
+    users: UserDto[];
 }
 /**
  * @generated from protobuf message user.ActivateUserRequest
@@ -127,6 +156,10 @@ export interface ActivateUserResponse {
      * @generated from protobuf field: string token = 1;
      */
     token: string;
+    /**
+     * @generated from protobuf field: user.UserDto user = 2;
+     */
+    user?: UserDto;
 }
 /**
  * @generated from protobuf message user.ChangeLanguageRequest
@@ -138,17 +171,15 @@ export interface ChangeLanguageRequest {
     language: string;
 }
 /**
- * @generated from protobuf message user.NightModeRequest
+ * @generated from protobuf message user.UserLanguageResponse
  */
-export interface NightModeRequest {
+export interface UserLanguageResponse {
     /**
-     * @generated from protobuf field: bool nightMode = 1;
+     * @generated from protobuf field: string lan = 1;
      */
-    nightMode: boolean;
+    lan: string;
 }
 /**
- * Représente la réponse après création d'une entrée dans l'historique
- *
  * @generated from protobuf message user.HistoryEntryResponse
  */
 export interface HistoryEntryResponse {
@@ -160,17 +191,11 @@ export interface HistoryEntryResponse {
      */
     status: string; // Par exemple, "success" ou "error"}
 /**
- * Représente une demande pour récupérer les entrées d'historique
- *
- * Vous pouvez ajouter des champs de filtrage si nécessaire
- *
  * @generated from protobuf message user.GetHistoryRequest
  */
 export interface GetHistoryRequest {
 }
 /**
- * Représente la réponse de la liste des entrées d'historique
- *
  * @generated from protobuf message user.GetHistoryResponse
  */
 export interface GetHistoryResponse {
@@ -180,8 +205,6 @@ export interface GetHistoryResponse {
     entries: HistoryEntry[];
 }
 /**
- * Définit un enregistrement individuel dans l'historique
- *
  * @generated from protobuf message user.HistoryEntry
  */
 export interface HistoryEntry {
@@ -205,6 +228,53 @@ export interface HistoryEntry {
      * @generated from protobuf field: string description = 5;
      */
     description: string;
+}
+/**
+ * @generated from protobuf message user.NightModeRequest
+ */
+export interface NightModeRequest {
+    /**
+     * @generated from protobuf field: bool nightMode = 1;
+     */
+    nightMode: boolean;
+}
+/**
+ * @generated from protobuf message user.UserRequest
+ */
+export interface UserRequest {
+}
+/**
+ * @generated from protobuf enum user.RoleEnum
+ */
+export enum RoleEnum {
+    /**
+     * @generated from protobuf enum value: ADMIN = 0;
+     */
+    ADMIN = 0,
+    /**
+     * @generated from protobuf enum value: CAN_INVITE = 1;
+     */
+    CAN_INVITE = 1,
+    /**
+     * @generated from protobuf enum value: CAN_MANAGE_IP = 2;
+     */
+    CAN_MANAGE_IP = 2,
+    /**
+     * @generated from protobuf enum value: CAN_READ_IP = 3;
+     */
+    CAN_READ_IP = 3,
+    /**
+     * @generated from protobuf enum value: CAN_READ_LOGS = 4;
+     */
+    CAN_READ_LOGS = 4,
+    /**
+     * @generated from protobuf enum value: CAN_MANAGE_CONFIGURATION = 5;
+     */
+    CAN_MANAGE_CONFIGURATION = 5,
+    /**
+     * @generated from protobuf enum value: CAN_READ_SERVICES = 6;
+     */
+    CAN_READ_SERVICES = 6
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class SignInSignUpRequest$Type extends MessageType<SignInSignUpRequest> {
@@ -266,7 +336,8 @@ class UserResponse$Type extends MessageType<UserResponse> {
     constructor() {
         super("user.UserResponse", [
             { no: 1, name: "message", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "token", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 2, name: "token", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "user", kind: "message", T: () => UserDto }
         ]);
     }
     create(value?: PartialMessage<UserResponse>): UserResponse {
@@ -288,6 +359,9 @@ class UserResponse$Type extends MessageType<UserResponse> {
                 case /* string token */ 2:
                     message.token = reader.string();
                     break;
+                case /* user.UserDto user */ 3:
+                    message.user = UserDto.internalBinaryRead(reader, reader.uint32(), options, message.user);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -306,6 +380,9 @@ class UserResponse$Type extends MessageType<UserResponse> {
         /* string token = 2; */
         if (message.token !== "")
             writer.tag(2, WireType.LengthDelimited).string(message.token);
+        /* user.UserDto user = 3; */
+        if (message.user)
+            UserDto.internalBinaryWrite(message.user, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -487,13 +564,13 @@ class InviteUserRequest$Type extends MessageType<InviteUserRequest> {
     constructor() {
         super("user.InviteUserRequest", [
             { no: 1, name: "email", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "admin", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "roles", kind: "enum", repeat: 1 /*RepeatType.PACKED*/, T: () => ["user.RoleEnum", RoleEnum] }
         ]);
     }
     create(value?: PartialMessage<InviteUserRequest>): InviteUserRequest {
         const message = globalThis.Object.create((this.messagePrototype!));
         message.email = "";
-        message.admin = false;
+        message.roles = [];
         if (value !== undefined)
             reflectionMergePartial<InviteUserRequest>(this, message, value);
         return message;
@@ -506,8 +583,12 @@ class InviteUserRequest$Type extends MessageType<InviteUserRequest> {
                 case /* string email */ 1:
                     message.email = reader.string();
                     break;
-                case /* bool admin */ 2:
-                    message.admin = reader.bool();
+                case /* repeated user.RoleEnum roles */ 2:
+                    if (wireType === WireType.LengthDelimited)
+                        for (let e = reader.int32() + reader.pos; reader.pos < e;)
+                            message.roles.push(reader.int32());
+                    else
+                        message.roles.push(reader.int32());
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -524,9 +605,13 @@ class InviteUserRequest$Type extends MessageType<InviteUserRequest> {
         /* string email = 1; */
         if (message.email !== "")
             writer.tag(1, WireType.LengthDelimited).string(message.email);
-        /* bool admin = 2; */
-        if (message.admin !== false)
-            writer.tag(2, WireType.Varint).bool(message.admin);
+        /* repeated user.RoleEnum roles = 2; */
+        if (message.roles.length) {
+            writer.tag(2, WireType.LengthDelimited).fork();
+            for (let i = 0; i < message.roles.length; i++)
+                writer.int32(message.roles[i]);
+            writer.join();
+        }
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -542,13 +627,13 @@ class ChangeRightsRequest$Type extends MessageType<ChangeRightsRequest> {
     constructor() {
         super("user.ChangeRightsRequest", [
             { no: 1, name: "email", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "admin", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "roles", kind: "enum", repeat: 1 /*RepeatType.PACKED*/, T: () => ["user.RoleEnum", RoleEnum] }
         ]);
     }
     create(value?: PartialMessage<ChangeRightsRequest>): ChangeRightsRequest {
         const message = globalThis.Object.create((this.messagePrototype!));
         message.email = "";
-        message.admin = false;
+        message.roles = [];
         if (value !== undefined)
             reflectionMergePartial<ChangeRightsRequest>(this, message, value);
         return message;
@@ -561,8 +646,12 @@ class ChangeRightsRequest$Type extends MessageType<ChangeRightsRequest> {
                 case /* string email */ 1:
                     message.email = reader.string();
                     break;
-                case /* bool admin */ 2:
-                    message.admin = reader.bool();
+                case /* repeated user.RoleEnum roles */ 2:
+                    if (wireType === WireType.LengthDelimited)
+                        for (let e = reader.int32() + reader.pos; reader.pos < e;)
+                            message.roles.push(reader.int32());
+                    else
+                        message.roles.push(reader.int32());
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -579,9 +668,13 @@ class ChangeRightsRequest$Type extends MessageType<ChangeRightsRequest> {
         /* string email = 1; */
         if (message.email !== "")
             writer.tag(1, WireType.LengthDelimited).string(message.email);
-        /* bool admin = 2; */
-        if (message.admin !== false)
-            writer.tag(2, WireType.Varint).bool(message.admin);
+        /* repeated user.RoleEnum roles = 2; */
+        if (message.roles.length) {
+            writer.tag(2, WireType.LengthDelimited).fork();
+            for (let i = 0; i < message.roles.length; i++)
+                writer.int32(message.roles[i]);
+            writer.join();
+        }
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -593,10 +686,97 @@ class ChangeRightsRequest$Type extends MessageType<ChangeRightsRequest> {
  */
 export const ChangeRightsRequest = new ChangeRightsRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
+class UserDto$Type extends MessageType<UserDto> {
+    constructor() {
+        super("user.UserDto", [
+            { no: 1, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "email", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "roles", kind: "enum", repeat: 1 /*RepeatType.PACKED*/, T: () => ["user.RoleEnum", RoleEnum] },
+            { no: 4, name: "activated", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 5, name: "language", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<UserDto>): UserDto {
+        const message = globalThis.Object.create((this.messagePrototype!));
+        message.id = "";
+        message.email = "";
+        message.roles = [];
+        message.activated = false;
+        message.language = "";
+        if (value !== undefined)
+            reflectionMergePartial<UserDto>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: UserDto): UserDto {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string id */ 1:
+                    message.id = reader.string();
+                    break;
+                case /* string email */ 2:
+                    message.email = reader.string();
+                    break;
+                case /* repeated user.RoleEnum roles */ 3:
+                    if (wireType === WireType.LengthDelimited)
+                        for (let e = reader.int32() + reader.pos; reader.pos < e;)
+                            message.roles.push(reader.int32());
+                    else
+                        message.roles.push(reader.int32());
+                    break;
+                case /* bool activated */ 4:
+                    message.activated = reader.bool();
+                    break;
+                case /* string language */ 5:
+                    message.language = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: UserDto, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string id = 1; */
+        if (message.id !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.id);
+        /* string email = 2; */
+        if (message.email !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.email);
+        /* repeated user.RoleEnum roles = 3; */
+        if (message.roles.length) {
+            writer.tag(3, WireType.LengthDelimited).fork();
+            for (let i = 0; i < message.roles.length; i++)
+                writer.int32(message.roles[i]);
+            writer.join();
+        }
+        /* bool activated = 4; */
+        if (message.activated !== false)
+            writer.tag(4, WireType.Varint).bool(message.activated);
+        /* string language = 5; */
+        if (message.language !== "")
+            writer.tag(5, WireType.LengthDelimited).string(message.language);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message user.UserDto
+ */
+export const UserDto = new UserDto$Type();
+// @generated message type with reflection information, may provide speed optimized methods
 class GetUsersResponse$Type extends MessageType<GetUsersResponse> {
     constructor() {
         super("user.GetUsersResponse", [
-            { no: 1, name: "users", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "users", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => UserDto }
         ]);
     }
     create(value?: PartialMessage<GetUsersResponse>): GetUsersResponse {
@@ -611,8 +791,8 @@ class GetUsersResponse$Type extends MessageType<GetUsersResponse> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* repeated string users */ 1:
-                    message.users.push(reader.string());
+                case /* repeated user.UserDto users */ 1:
+                    message.users.push(UserDto.internalBinaryRead(reader, reader.uint32(), options));
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -626,9 +806,9 @@ class GetUsersResponse$Type extends MessageType<GetUsersResponse> {
         return message;
     }
     internalBinaryWrite(message: GetUsersResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* repeated string users = 1; */
+        /* repeated user.UserDto users = 1; */
         for (let i = 0; i < message.users.length; i++)
-            writer.tag(1, WireType.LengthDelimited).string(message.users[i]);
+            UserDto.internalBinaryWrite(message.users[i], writer.tag(1, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -698,7 +878,8 @@ export const ActivateUserRequest = new ActivateUserRequest$Type();
 class ActivateUserResponse$Type extends MessageType<ActivateUserResponse> {
     constructor() {
         super("user.ActivateUserResponse", [
-            { no: 1, name: "token", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "token", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "user", kind: "message", T: () => UserDto }
         ]);
     }
     create(value?: PartialMessage<ActivateUserResponse>): ActivateUserResponse {
@@ -716,6 +897,9 @@ class ActivateUserResponse$Type extends MessageType<ActivateUserResponse> {
                 case /* string token */ 1:
                     message.token = reader.string();
                     break;
+                case /* user.UserDto user */ 2:
+                    message.user = UserDto.internalBinaryRead(reader, reader.uint32(), options, message.user);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -731,6 +915,9 @@ class ActivateUserResponse$Type extends MessageType<ActivateUserResponse> {
         /* string token = 1; */
         if (message.token !== "")
             writer.tag(1, WireType.LengthDelimited).string(message.token);
+        /* user.UserDto user = 2; */
+        if (message.user)
+            UserDto.internalBinaryWrite(message.user, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -789,26 +976,26 @@ class ChangeLanguageRequest$Type extends MessageType<ChangeLanguageRequest> {
  */
 export const ChangeLanguageRequest = new ChangeLanguageRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class NightModeRequest$Type extends MessageType<NightModeRequest> {
+class UserLanguageResponse$Type extends MessageType<UserLanguageResponse> {
     constructor() {
-        super("user.NightModeRequest", [
-            { no: 1, name: "nightMode", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+        super("user.UserLanguageResponse", [
+            { no: 1, name: "lan", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
-    create(value?: PartialMessage<NightModeRequest>): NightModeRequest {
+    create(value?: PartialMessage<UserLanguageResponse>): UserLanguageResponse {
         const message = globalThis.Object.create((this.messagePrototype!));
-        message.nightMode = false;
+        message.lan = "";
         if (value !== undefined)
-            reflectionMergePartial<NightModeRequest>(this, message, value);
+            reflectionMergePartial<UserLanguageResponse>(this, message, value);
         return message;
     }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: NightModeRequest): NightModeRequest {
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: UserLanguageResponse): UserLanguageResponse {
         let message = target ?? this.create(), end = reader.pos + length;
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* bool nightMode */ 1:
-                    message.nightMode = reader.bool();
+                case /* string lan */ 1:
+                    message.lan = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -821,10 +1008,10 @@ class NightModeRequest$Type extends MessageType<NightModeRequest> {
         }
         return message;
     }
-    internalBinaryWrite(message: NightModeRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* bool nightMode = 1; */
-        if (message.nightMode !== false)
-            writer.tag(1, WireType.Varint).bool(message.nightMode);
+    internalBinaryWrite(message: UserLanguageResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string lan = 1; */
+        if (message.lan !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.lan);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -832,9 +1019,9 @@ class NightModeRequest$Type extends MessageType<NightModeRequest> {
     }
 }
 /**
- * @generated MessageType for protobuf message user.NightModeRequest
+ * @generated MessageType for protobuf message user.UserLanguageResponse
  */
-export const NightModeRequest = new NightModeRequest$Type();
+export const UserLanguageResponse = new UserLanguageResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class HistoryEntryResponse$Type extends MessageType<HistoryEntryResponse> {
     constructor() {
@@ -1041,20 +1228,94 @@ class HistoryEntry$Type extends MessageType<HistoryEntry> {
  * @generated MessageType for protobuf message user.HistoryEntry
  */
 export const HistoryEntry = new HistoryEntry$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class NightModeRequest$Type extends MessageType<NightModeRequest> {
+    constructor() {
+        super("user.NightModeRequest", [
+            { no: 1, name: "nightMode", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+        ]);
+    }
+    create(value?: PartialMessage<NightModeRequest>): NightModeRequest {
+        const message = globalThis.Object.create((this.messagePrototype!));
+        message.nightMode = false;
+        if (value !== undefined)
+            reflectionMergePartial<NightModeRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: NightModeRequest): NightModeRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* bool nightMode */ 1:
+                    message.nightMode = reader.bool();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: NightModeRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* bool nightMode = 1; */
+        if (message.nightMode !== false)
+            writer.tag(1, WireType.Varint).bool(message.nightMode);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message user.NightModeRequest
+ */
+export const NightModeRequest = new NightModeRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class UserRequest$Type extends MessageType<UserRequest> {
+    constructor() {
+        super("user.UserRequest", []);
+    }
+    create(value?: PartialMessage<UserRequest>): UserRequest {
+        const message = globalThis.Object.create((this.messagePrototype!));
+        if (value !== undefined)
+            reflectionMergePartial<UserRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: UserRequest): UserRequest {
+        return target ?? this.create();
+    }
+    internalBinaryWrite(message: UserRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message user.UserRequest
+ */
+export const UserRequest = new UserRequest$Type();
 /**
  * @generated ServiceType for protobuf service user.User
  */
 export const User = new ServiceType("user.User", [
     { name: "SignIn", options: {}, I: SignInSignUpRequest, O: UserResponse },
     { name: "SignUp", options: {}, I: SignInSignUpRequest, O: UserResponse },
+    { name: "GetMe", options: {}, I: EmptyRequest, O: UserDto },
     { name: "ResetPassword", options: {}, I: PasswordRequest, O: EmptyResponse },
     { name: "ChangeEmail", options: {}, I: EmailRequest, O: EmptyResponse },
-    { name: "InviteUser", options: {}, I: InviteUserRequest, O: EmptyResponse },
+    { name: "InviteUser", options: {}, I: InviteUserRequest, O: UserDto },
     { name: "ActivateUser", options: {}, I: ActivateUserRequest, O: ActivateUserResponse },
-    { name: "ChangeRights", options: {}, I: ChangeRightsRequest, O: EmptyResponse },
+    { name: "ChangeRights", options: {}, I: ChangeRightsRequest, O: UserDto },
     { name: "GetUsers", options: {}, I: EmptyRequest, O: GetUsersResponse },
     { name: "DeleteUser", options: {}, I: EmailRequest, O: EmptyResponse },
     { name: "ChangeLanguage", options: {}, I: ChangeLanguageRequest, O: EmptyResponse },
+    { name: "GetUserLanguage", options: {}, I: UserRequest, O: UserLanguageResponse },
     { name: "GetHistory", options: {}, I: GetHistoryRequest, O: GetHistoryResponse },
     { name: "NightMode", options: {}, I: NightModeRequest, O: EmptyResponse }
 ]);

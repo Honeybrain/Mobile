@@ -3,6 +3,7 @@ import { GlobalStyles } from '../styles/GlobalStyles';
 import { useTranslation } from "react-i18next";
 import { View, Text, TextInput, TouchableOpacity, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import NavBar from '../Nav/NavBar';
 
 const styles = StyleSheet.create({
   container: {
@@ -108,9 +109,6 @@ const HistoryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.backArrow} onPress={() => navigation.navigate('Home')}>
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
       <Text style={styles.title}>{t('HistoryScreen.ActionHistory')}</Text>
       <TextInput
         placeholder={t('HistoryScreen.SearchByAction')}
@@ -124,6 +122,7 @@ const HistoryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
+      <NavBar navigation={navigation} />
     </SafeAreaView>
   );
 };

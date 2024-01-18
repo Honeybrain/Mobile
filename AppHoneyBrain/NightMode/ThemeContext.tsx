@@ -1,20 +1,21 @@
 import React, { createContext, useState, ReactNode } from 'react';
+import useNightMode from '../hooks/useNightMode';
 
-export const ThemeContext = createContext<any>(null);
+export const ThemeContext = createContext({
+  isDarkMode: false,
+  toggleTheme: () => {}
+});
 
 interface ThemeProviderProps {
   children: ReactNode;
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isNightMode, toggleNightMode } = useNightMode();
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+    <ThemeContext.Provider value={{ isDarkMode: isNightMode, toggleTheme: toggleNightMode }}>
       {children}
     </ThemeContext.Provider>
   );

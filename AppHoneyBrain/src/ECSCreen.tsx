@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, ScrollView, TextInput, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import NavBar from '../Nav/NavBar';
@@ -6,6 +6,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList} from '../Nav/navigationTypes';
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ThemeContext } from '../NightMode/ThemeContext';
 
 const textLines = [
   "1. A picture is worth a thousand words.",
@@ -65,12 +66,18 @@ type EnteringConnectionsProps = {
 
 const EnteringConnections: React.FC<EnteringConnectionsProps> = ({ navigation }) => {
   const { t } = useTranslation();
+  const { isDarkMode } = useContext(ThemeContext);
+
+  // Styles conditionnels basés sur le mode nuit
+  const containerBackgroundColor = isDarkMode ? '#333' : '#fff';
+  const textColor = isDarkMode ? 'white' : 'black';
+  const scrollViewBackgroundColor = isDarkMode ? '#1a1a1a' : '#f0f0f0';
 
   return(
-    <SafeAreaView style={styles.container}>
-      <Text style={GlobalStyles.title}>{t('ECScreen.EnteringConnections')}</Text>
+    <SafeAreaView style={[styles.container, { backgroundColor: containerBackgroundColor }]}>
+      <Text style={[GlobalStyles.title, { color: textColor }]}>{t('ECScreen.EnteringConnections')}</Text>
       <View
-      style={styles.scrollViewWrapper}
+      style={[styles.scrollViewWrapper, { borderColor: isDarkMode ? 'darkgrey' : 'lightgrey' }]}
       >
         <ScrollView
             horizontal={true}
@@ -84,6 +91,7 @@ const EnteringConnections: React.FC<EnteringConnectionsProps> = ({ navigation })
               key={index}
               style={[
                 styles.scrollViewText,
+                // { backgroundColor: scrollViewBackgroundColor, color: textColor },
                 index % 2 === 0 ? styles.evenLine : styles.oddLine,
               ]}
             >
@@ -98,6 +106,7 @@ const EnteringConnections: React.FC<EnteringConnectionsProps> = ({ navigation })
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -109,7 +118,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderColor: 'lightgrey',
     borderWidth: 1.5,
-    height: '80%'
+    height: '80%',
   },
   scrollViewText: {
     fontSize: 16

@@ -10,6 +10,7 @@ import useResetPasswordRPC from '../hooks/useResetPasswordRPC';
 import { ToastAndroid } from 'react-native'; 
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { useTranslation } from "react-i18next";
+import { ThemeContext } from '../NightMode/ThemeContext'; 
 
 type SettingsScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Settings'>;
@@ -23,7 +24,11 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState(0);
-
+  const { isDarkMode } = useContext(ThemeContext);
+  const textColor = isDarkMode ? 'white' : 'black';
+  const backgroundColor = isDarkMode ? '#333' : 'white';
+  const borderColor = isDarkMode ? 'darkgrey' : 'gray';
+  const placeholderTextColor = isDarkMode ? 'lightgrey' : 'darkgrey'; // Couleur pour les placeholders
 
   const handleChangePassword = async () => {
     try {
@@ -61,45 +66,47 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   }
 
   return (
-    <View style={Styles.container}>
-      <Text style={Styles.title}>{t('SettingsScreen.SettingsPage')}</Text>
+    <View style={[Styles.container, { backgroundColor }]}>
+      <Text style={[Styles.title, { color: textColor }]}>{t('SettingsScreen.SettingsPage')}</Text>
       {/* Bouton "Changer de mot de passe" */}
-      <Text style={{ color: 'black', fontWeight: 'bold', marginTop: 10 }}>{t('SettingsScreen.ChangePassword')}:</Text>
+      <Text style={{ color: textColor, fontWeight: 'bold', marginTop: 10 }}>{t('SettingsScreen.ChangePassword')}:</Text>
       <TextInput
-        style={{ borderColor: 'gray', borderWidth: 1, height: 25, width: '60%', marginTop: 10, backgroundColor: 'white' }}
+        style={{ borderColor, borderWidth: 1, height: 25, width: '60%', marginTop: 10, backgroundColor, color: textColor  }}
         onChangeText={text => setPassword(text)}
         value={password}
+        placeholderTextColor={placeholderTextColor}
       />
       <TouchableOpacity style={Styles.button} onPress={handleChangePassword} >
         <Text style={Styles.buttonText}>{t('SettingsScreen.Validate')}</Text>
       </TouchableOpacity>
 
-      <Text style={{ color: 'black', fontWeight: 'bold', marginTop: 10 }}>{t('SettingsScreen.ChangeEmailAdress')}:</Text>
+      <Text style={{ color: textColor, fontWeight: 'bold', marginTop: 10 }}>{t('SettingsScreen.ChangeEmailAdress')}:</Text>
       <TextInput
-        style={{ borderColor: 'gray', borderWidth: 1, height: 25, width: '60%', marginTop: 10, backgroundColor: 'white' }}
+        style={{ borderColor, borderWidth: 1, height: 25, width: '60%', marginTop: 10, backgroundColor, color: textColor  }}
         onChangeText={text => setEmail(text)}
         value={email}
+        placeholderTextColor={placeholderTextColor}
       />
       <TouchableOpacity style={Styles.button} onPress={handleChangeEmail} >
         <Text style={Styles.buttonText}>{t('SettingsScreen.Validate')}</Text>
       </TouchableOpacity>
 
-      <Text style={{ color: 'black', fontWeight: 'bold', marginTop: 10 }}>Changer de langue:</Text>
+      <Text style={{ color: textColor, fontWeight: 'bold', marginTop: 10 }}>Changer de langue:</Text>
       <ModalDropdown
         options={['🇫🇷 Français', '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Anglais', '🇪🇸 Espagnol', '🇨🇳 Chinois']}
         onSelect={(index: number, value: string) => handleLanguageChange(index, value)}
         defaultValue={selectedLanguage}
-        style={{ borderColor: 'gray', borderWidth: 1, height: 40, width: '60%', marginTop: 10, backgroundColor: 'white', justifyContent: 'center', paddingLeft: 10 }}
+        style={{ borderColor, borderWidth: 1, height: 40, width: '60%', marginTop: 10, backgroundColor , justifyContent: 'center', paddingLeft: 10 }}
       />
 
-      <Text style={{ color: 'black', fontWeight: 'bold', marginTop: 10 }}>{t('SettingsScreen.ChangeLanguage')}:</Text>
+      <Text style={{ color: textColor, fontWeight: 'bold', marginTop: 10 }}>{t('SettingsScreen.ChangeLanguage')}:</Text>
       <ModalDropdown
         options={[`🇫🇷 ${t('SettingsScreen.French')}`,
                   `🏴󠁧󠁢󠁥󠁮󠁧󠁿 ${t('SettingsScreen.English')}`,
                   `🇪🇸 ${t('SettingsScreen.Spanish')}`,
                   `🇨🇳 ${t('SettingsScreen.Chinese')}`]}
         onSelect={(index: number, value: string) => HandleLanguageChange(index, value)}
-        style={{ borderColor: 'gray', borderWidth: 1, height: 40, width: '30%', marginTop: 10, backgroundColor: 'white', justifyContent: 'center', paddingLeft: 10 }}
+        style={{ borderColor: 'gray', borderWidth: 1, height: 40, width: '30%', marginTop: 10, backgroundColor: 'white', justifyContent: 'center', paddingLeft: 10, color: textColor }}
         dropdownStyle={{marginTop: -26, height: 80, width: "30%", marginLeft: -10, paddingLeft: 0}}
         defaultIndex={selectedLanguage}
       />

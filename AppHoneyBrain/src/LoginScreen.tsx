@@ -19,40 +19,48 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, themedStyles }) =
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { login } = useContext(AuthContext);
+  const [error, setError] = useState<string>('');
 
 
   const handleSubmit = async () => {
     try {
       // Appel de la méthode login avec email et mot de passe
-      //await login(email, password);
+      // await login(email, password);
       navigation.navigate('Home');
       // Gestion de la navigation ou des actions post-connexion ici
     } catch (error) {
+      setError('Adresse e-mail ou mot de passe incorrect.');
     }
   };
 
   return (
-    <View style={GlobalStyles.container}>
+    <View style={[GlobalStyles.container, themedStyles.containerStyle]}>
       <Image source={require('../assets/honeybrainlogo.png')} resizeMode="contain" style={{ width: 105, height: 125 }} />
-      <Text style={GlobalStyles.title}>{t('LoginScreen.ConnectYourself')}</Text>
+      <Text style={[GlobalStyles.title, themedStyles.textStyle]}>{t('LoginScreen.ConnectYourself')}</Text>
 
       <TextInput 
         placeholder={t('LoginScreen.UsernameEmail')} 
-        style={GlobalStyles.input} 
-        onChangeText={setEmail} // Directly pass setEmail as the handler
+        style={[GlobalStyles.input, themedStyles.textInputStyle]}
+        onChangeText={setEmail}
+        placeholderTextColor={themedStyles.textStyle.color}
+
       />
 
       <TextInput 
         placeholder={t('LoginScreen.Password')}
         secureTextEntry 
-        style={GlobalStyles.input} 
+        style={[GlobalStyles.input, themedStyles.textInputStyle]} // Appliquer un style conditionnel
         onChangeText={setPassword} // Directly pass setPassword as the handler
+        placeholderTextColor={themedStyles.textStyle.color}
+
       />
 
       <TouchableOpacity style={GlobalStyles.button} onPress={handleSubmit}>
         <Text style={GlobalStyles.buttonText}>Login</Text>
       </TouchableOpacity>
-
+      {error !== '' && (
+        <Text style={{ color: 'red', marginTop: 10 }}>{error}</Text>
+       )}
       {/* Uncomment and modify the following if you have a password recovery or registration flow */}
       {/* 
       <Text style={{ marginTop: 10, color: '#666' }}>Forgot Password?</Text>
